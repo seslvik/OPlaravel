@@ -15,7 +15,20 @@ class CreateGidrantsTable extends Migration
     {
         Schema::create('gidrants', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->unsignedBigInteger('user_id');
+
+            $table->string('zavod', 20);
+            $table->string('objekt');
+            $table->text('opisanie');
+            $table->string('file')->unique();
+            $table->string('pos_x', 5);
+            $table->string('pos_y', 5);
+
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
