@@ -22,8 +22,8 @@ class CreateOperplansTable extends Migration
             $table->string('objekt');
             $table->text('opisanie');
             $table->string('file');
-            $table->string('pos_x', 5);
-            $table->string('pos_y', 5);
+            $table->float('pos_x', 4,3);
+            $table->float('pos_y', 4,3);
 
             $table->timestamps();
             $table->softDeletes();
