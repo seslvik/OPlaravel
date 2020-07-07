@@ -12,9 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/naftan', 'NaftanController@index')->name('naftanHome');
+
+Route::get('/polymir', 'PolymirController@index')->name('polymirHome');
+
+
+Route::group(['prefix' => 'op'], function (){
+    Route::resource('operplans', 'OperplanController')->names('operplan.all');
+});
