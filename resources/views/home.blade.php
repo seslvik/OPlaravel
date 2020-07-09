@@ -33,8 +33,7 @@
                     <div class="card-box">
                         <h6 class="m-t-0">Нафтан</h6>
                         <div>
-                            <a href="{{ url('/naftan') }}">
-                                <!--<img src="img/logo_sm.png" alt="" height="26" class="logo-small">-->
+                            <a href="{{ route('naftanhome') }}">
                                 <img class="card-img-top" src="{{ asset('img/sputnik/Нафтан100_mini.jpg') }}" alt="ОАО Нафтан">
                             </a>
                         </div>
@@ -45,7 +44,7 @@
                     <div class="card-box">
                         <h6 class="m-t-0">Полимир</h6>
                         <div>
-                            <a href="{{ url('/polymir') }}">
+                            <a href="{{ route('polymirhome') }}">
                                 <!--<img src="img/logo_sm.png" alt="" height="26" class="logo-small">-->
                                 <img class="card-img-top" src="{{ asset('img/sputnik/Полимир100_mini.jpg') }}" alt="ОАО Нафтан">
                             </a>

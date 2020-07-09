@@ -13,7 +13,10 @@ Route::get('/naftan', 'Naftan\NaftanHomeController@index')->name('naftanhome'); 
 Route::get('/polymir', 'Polymir\PolymirHomeController@index')->name('polymirhome');//открывает карту Полимира +
 
 
-//переделать
-Route::group(['prefix' => 'op'], function (){
-    Route::resource('operplans', 'OperplanController')->names('operplan.all');
+Route::group(['namespace' => 'Naftan', 'prefix' => 'naftan'], function (){
+    Route::resource('operplans', 'NaftanOperplanController')->names('operplan.naftan');// +
+});
+
+Route::group(['namespace' => 'Polymir', 'prefix' => 'polymir'], function (){
+    Route::resource('operplans', 'PolimirOperplanController')->names('operplan.polymir');// +
 });

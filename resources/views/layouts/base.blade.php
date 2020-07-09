@@ -58,7 +58,7 @@
                         <li class="has-submenu">
                             <a href="#"><span><i class="ti-spray"></i></span><span> ОП Нафтан </span> </a>
                             <ul class="submenu">
-                                <li><a href="{{ url('op/operplans/Нафтан')}}">Оперативные планы</a></li>
+                                <li><a href="{{ route('operplan.naftan.index')}}">Оперативные планы</a></li>
                                 <li><a href="">Пожарные гидранты</a></li>
                             </ul>
                         </li>
@@ -66,7 +66,7 @@
                         <li class="has-submenu">
                             <a href="#"><span><i class="ti-spray"></i></span><span> ОП Полимир </span> </a>
                             <ul class="submenu">
-                                <li><a href="{{ url('op/operplans/Полимир')}}">Оперативные планы</a></li>
+                                <li><a href="{{ route('operplan.polymir.index')}}">Оперативные планы</a></li>
                                 <li><a href="">Пожарные гидранты</a></li>
                             </ul>
                         </li>
@@ -176,7 +176,7 @@
 
 @yield('content')
 
-<script src="{{ asset('js/popper.min.js') }}"></script>
+{{--<script src="{{ asset('js/popper.min.js') }}"></script>--}}
 <script src="{{ asset('js/app.js') }}"></script>
 
 <!-- Required datatable js -->

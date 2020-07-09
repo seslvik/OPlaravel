@@ -2,6 +2,6 @@
 
 @section('content')
 
-                        <h6 class="m-t-0">Полимир</h6>
+                        <h6 class="m-t-0">Здесь карта завода Полимир</h6>
 
 @endsection

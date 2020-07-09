@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Operplan extends Model
 {
     use SoftDeletes;
+
 }

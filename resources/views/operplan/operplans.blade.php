@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-
+    @php /** @var \App\Models\Operplan $$colums */ @endphp
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -12,8 +12,11 @@
 
             <div class="row">
                 <div class="col-12">
+
+                    @include('includes.result_messages')
+
                     <div class="table-responsive">
-                        <table id="datatable" class="table table-bordered">
+                        <table id="datatable" class="table table-bordered table-hover table-sm">
                             <thead>
                             <tr>
                                 <th>№</th>
@@ -23,6 +26,7 @@
                                 <th>Дата</th>
                                 <th>На карте</th>
                                 <th>Изменить</th>
+                                <th>Удалить</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -32,9 +36,16 @@
                                 <td>{{ $colum->zavod }}</td>
                                 <td><a href = '{{ $colum->file }}'>{{ $colum->objekt }}</a></td>
                                 <td>{{ $colum->opisanie }}</td>
-                                <td>{{ $colum->created_at }}</td>
-                                <td><a href = ''>Показать на карте</a></td>
-                                <td><a href = ''>Изменить</a></td>
+                                <td>{{ \Carbon\Carbon::parse($colum->created_at)->format('d.M.Y H:i') }}</td>
+                                <td><a href = '{{ route('operplan.'.$zavod.'.show', $colum->id) }}'>Показать на карте</a></td>
+                                <td><a href = '{{ route('operplan.'.$zavod.'.edit', $colum->id) }}'>Изменить</a></td>
+                                <td>
+                                    <form method="post" action="{{route('operplan.'.$zavod.'.destroy', $colum->id)}}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-link">Удалить</button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -47,6 +58,7 @@
                                 <th>Дата</th>
                                 <th>На карте</th>
                                 <th>Изменить</th>
+                                <th>Удалить</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -61,5 +73,4 @@
             $('#datatable').DataTable();
         } );
     </script>
-
 @endsection
