@@ -1269,8 +1269,8 @@ namespace PHPSTORM_META {
 
 	override(\factory(0), map([
         '' => '@FactoryBuilder',
-        'App\Models\Gidrants' => \App\Models\GidrantsFactoryBuilder::class,
-        'App\Models\Operplans' => \App\Models\OperplansFactoryBuilder::class,
+        'App\Models\Gidrant' => \App\Models\GidrantsFactoryBuilder::class,
+        'App\Models\Operplan' => \App\Models\OperplansFactoryBuilder::class,
         'App\User' => \App\UserFactoryBuilder::class,
 	]));
 

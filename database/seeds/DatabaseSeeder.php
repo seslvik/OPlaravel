@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Gidrant;
+use App\Models\Operplan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call(UsersTableSeeder::class);
-         factory(\App\Models\Operplans::class, 50)->create();
-         factory(\App\Models\Gidrants::class, 50)->create();
+         factory(Operplan::class, 50)->create();
+         factory(Gidrant::class, 50)->create();
     }
 }

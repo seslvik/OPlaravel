@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Operplans;
+use App\Models\Operplan;
 use Illuminate\Http\Request;
 
 class OperplanController extends Controller
@@ -53,12 +53,12 @@ class OperplanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $id
+     * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        $colums = Operplans::where('zavod', $id )
+        $colums = Operplan::where('zavod', $id ) //здесь надо показать маркер оперплана на карте в зависимости от id открыть карту Нафтана или Полимира
             ->orderBy('objekt', 'asc')
             ->get();
         return view('operplan.operplans', compact( 'colums'));

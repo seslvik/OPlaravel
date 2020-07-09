@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Gidrants;
+use App\Models\Gidrant;
 use Faker\Generator as Faker;
 
-$factory->define(Gidrants::class, function (Faker $faker) {
+$factory->define(Gidrant::class, function (Faker $faker) {
     $data = [
         'user_id' => rand(2,8),
         'zavod'         => $faker->randomElement(['Нафтан','Полимир']),//один из элементов массива

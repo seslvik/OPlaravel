@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Operplans;
+use App\Models\Operplan;
 use Faker\Generator as Faker;
 
-$factory->define(Operplans::class, function (Faker $faker) {
+$factory->define(Operplan::class, function (Faker $faker) {
     //$faker = Faker::create(ru_RU);
     //$randomFile = $faker->file($sourceDir='/home/gujarat/fakerFile/video', $targetDir='./public/videoLibrary', false);
     $data = [
