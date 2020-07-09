@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//namespace Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('auth.login');

@@ -33,8 +33,8 @@
                                 <td><a href = '{{ $colum->file }}'>{{ $colum->objekt }}</a></td>
                                 <td>{{ $colum->opisanie }}</td>
                                 <td>{{ $colum->created_at }}</td>
-                                <td><a href = '$zavod?pos_x=$pos_x&pos_y=$pos_y&vid=$vid_objekta'>Показать на карте</a></td>
-                                <td><a href = '?edit_id=$id'>Изменить</a></td>
+                                <td><a href = ''>Показать на карте</a></td>
+                                <td><a href = ''>Изменить</a></td>
                             </tr>
                             @endforeach
                             </tbody>

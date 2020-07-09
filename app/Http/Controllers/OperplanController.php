@@ -20,10 +20,12 @@ class OperplanController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
+        //здесь вывести таблицу со всеми оперпланами нафтана или полимира. Скорее всего необходимо контроллеры разбить по папкам
+        //Нафтан и полимир, а не Оперплан и Гидрант. А уже  в Нафтане или Полимире делать Гидрант и Оперплан
        return view('operplan.operplans');
     }
 
@@ -59,17 +61,7 @@ class OperplanController extends Controller
         $colums = Operplans::where('zavod', $id )
             ->orderBy('objekt', 'asc')
             ->get();
-
-        /*if ($id = 'Нафтан'){
-            $name = 'ОАО "Нафтан"';
-        }
-        if ($id = 'Полимир'){
-            $name = 'завода "Полимир" ОАО "Нафтан"';
-        }*/
-
-        //dd($id);
         return view('operplan.operplans', compact( 'colums'));
-        //return view('operplan.operplans', compact( 'id'));
     }
 
     /**

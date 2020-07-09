@@ -5,19 +5,21 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2020-07-05 18:19:39.
+    * Generated on 2020-07-08 16:49:51.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+        'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
         'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'Faker\Generator' => \Faker\Generator::class,
         'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -32,6 +34,7 @@ namespace PHPSTORM_META {
         'Illuminate\Contracts\Pipeline\Hub' => \Illuminate\Pipeline\Hub::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
+        'Illuminate\Database\Eloquent\Factory' => \Illuminate\Database\Eloquent\Factory::class,
         'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
         'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
         'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
@@ -58,6 +61,7 @@ namespace PHPSTORM_META {
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
         'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
         'command.event.cache' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -165,12 +169,14 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
+        'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
         'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'Faker\Generator' => \Faker\Generator::class,
         'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -185,6 +191,7 @@ namespace PHPSTORM_META {
         'Illuminate\Contracts\Pipeline\Hub' => \Illuminate\Pipeline\Hub::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
+        'Illuminate\Database\Eloquent\Factory' => \Illuminate\Database\Eloquent\Factory::class,
         'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
         'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
         'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
@@ -211,6 +218,7 @@ namespace PHPSTORM_META {
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
         'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
         'command.event.cache' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -318,12 +326,14 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+        'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
         'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'Faker\Generator' => \Faker\Generator::class,
         'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -338,6 +348,7 @@ namespace PHPSTORM_META {
         'Illuminate\Contracts\Pipeline\Hub' => \Illuminate\Pipeline\Hub::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
+        'Illuminate\Database\Eloquent\Factory' => \Illuminate\Database\Eloquent\Factory::class,
         'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
         'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
         'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
@@ -364,6 +375,7 @@ namespace PHPSTORM_META {
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
         'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
         'command.event.cache' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -471,12 +483,14 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+        'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
         'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'Faker\Generator' => \Faker\Generator::class,
         'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -491,6 +505,7 @@ namespace PHPSTORM_META {
         'Illuminate\Contracts\Pipeline\Hub' => \Illuminate\Pipeline\Hub::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
+        'Illuminate\Database\Eloquent\Factory' => \Illuminate\Database\Eloquent\Factory::class,
         'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
         'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
         'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
@@ -517,6 +532,7 @@ namespace PHPSTORM_META {
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
         'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
         'command.event.cache' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -624,12 +640,14 @@ namespace PHPSTORM_META {
     ]));
     override(\App::make(0), map([
         '' => '@',
+        'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
         'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'Faker\Generator' => \Faker\Generator::class,
         'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -644,6 +662,7 @@ namespace PHPSTORM_META {
         'Illuminate\Contracts\Pipeline\Hub' => \Illuminate\Pipeline\Hub::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
+        'Illuminate\Database\Eloquent\Factory' => \Illuminate\Database\Eloquent\Factory::class,
         'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
         'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
         'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
@@ -670,6 +689,7 @@ namespace PHPSTORM_META {
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
         'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
         'command.event.cache' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -777,12 +797,14 @@ namespace PHPSTORM_META {
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
+        'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
         'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'Faker\Generator' => \Faker\Generator::class,
         'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -797,6 +819,7 @@ namespace PHPSTORM_META {
         'Illuminate\Contracts\Pipeline\Hub' => \Illuminate\Pipeline\Hub::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
+        'Illuminate\Database\Eloquent\Factory' => \Illuminate\Database\Eloquent\Factory::class,
         'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
         'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
         'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
@@ -823,6 +846,7 @@ namespace PHPSTORM_META {
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
         'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
         'command.event.cache' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -930,12 +954,14 @@ namespace PHPSTORM_META {
     ]));
     override(\app(0), map([
         '' => '@',
+        'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
         'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'Faker\Generator' => \Faker\Generator::class,
         'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -950,6 +976,7 @@ namespace PHPSTORM_META {
         'Illuminate\Contracts\Pipeline\Hub' => \Illuminate\Pipeline\Hub::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
+        'Illuminate\Database\Eloquent\Factory' => \Illuminate\Database\Eloquent\Factory::class,
         'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
         'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
         'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
@@ -976,6 +1003,7 @@ namespace PHPSTORM_META {
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
         'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
         'command.event.cache' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -1083,12 +1111,14 @@ namespace PHPSTORM_META {
     ]));
     override(\resolve(0), map([
         '' => '@',
+        'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
         'Facade\Ignition\ErrorPage\Renderer' => \Facade\Ignition\ErrorPage\Renderer::class,
         'Facade\Ignition\IgnitionConfig' => \Facade\Ignition\IgnitionConfig::class,
         'Facade\Ignition\LogRecorder\LogRecorder' => \Facade\Ignition\LogRecorder\LogRecorder::class,
         'Facade\Ignition\QueryRecorder\QueryRecorder' => \Facade\Ignition\QueryRecorder\QueryRecorder::class,
+        'Faker\Generator' => \Faker\Generator::class,
         'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
@@ -1103,6 +1133,7 @@ namespace PHPSTORM_META {
         'Illuminate\Contracts\Pipeline\Hub' => \Illuminate\Pipeline\Hub::class,
         'Illuminate\Contracts\Queue\EntityResolver' => \Illuminate\Database\Eloquent\QueueEntityResolver::class,
         'Illuminate\Contracts\Routing\ResponseFactory' => \Illuminate\Routing\ResponseFactory::class,
+        'Illuminate\Database\Eloquent\Factory' => \Illuminate\Database\Eloquent\Factory::class,
         'Illuminate\Foundation\Mix' => \Illuminate\Foundation\Mix::class,
         'Illuminate\Mail\Markdown' => \Illuminate\Mail\Markdown::class,
         'Illuminate\Notifications\ChannelManager' => \Illuminate\Notifications\ChannelManager::class,
@@ -1129,6 +1160,7 @@ namespace PHPSTORM_META {
         'command.console.make' => \Illuminate\Foundation\Console\ConsoleMakeCommand::class,
         'command.controller.make' => \Illuminate\Routing\Console\ControllerMakeCommand::class,
         'command.db.wipe' => \Illuminate\Database\Console\WipeCommand::class,
+        'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
         'command.down' => \Illuminate\Foundation\Console\DownCommand::class,
         'command.environment' => \Illuminate\Foundation\Console\EnvironmentCommand::class,
         'command.event.cache' => \Illuminate\Foundation\Console\EventCacheCommand::class,
@@ -1235,6 +1267,12 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
     ]));
 
+	override(\factory(0), map([
+        '' => '@FactoryBuilder',
+        'App\Models\Gidrants' => \App\Models\GidrantsFactoryBuilder::class,
+        'App\Models\Operplans' => \App\Models\OperplansFactoryBuilder::class,
+        'App\User' => \App\UserFactoryBuilder::class,
+	]));
 
     override(\Illuminate\Support\Arr::add(0), type(0));
     override(\Illuminate\Support\Arr::except(0), type(0));
