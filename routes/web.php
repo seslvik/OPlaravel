@@ -20,3 +20,4 @@ Route::group(['namespace' => 'Naftan', 'prefix' => 'naftan'], function (){
 Route::group(['namespace' => 'Polymir', 'prefix' => 'polymir'], function (){
     Route::resource('operplans', 'PolimirOperplanController')->names('operplan.polymir');// +
 });
+
