@@ -2,6 +2,7 @@
 
 use App\Models\Gidrant;
 use App\Models\Operplan;
+use App\Models\Polygon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
          $this->call(UsersTableSeeder::class);
          factory(Operplan::class, 50)->create();
          factory(Gidrant::class, 50)->create();
+         factory(Polygon::class, 2)->create();
     }
 }

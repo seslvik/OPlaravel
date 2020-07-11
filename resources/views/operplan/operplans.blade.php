@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <h4 class="header-title m-t-0 m-b-20">Оперативные планы пожаротушения</h4>
+                    <h4 class="header-title m-t-0 m-b-20">Оперативные планы пожаротушения {{$gde}}</h4>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                                 <th>Дата</th>
                                 <th>На карте</th>
                                 <th>Изменить</th>
-                                <th>Удалить</th>
+                                {{--<th>Удалить</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -37,19 +37,20 @@
                                 <td>{{ $colum->zavod }}</td>
                                 <td><a href = '{{ $colum->file }}'>{{ $colum->objekt }}</a></td>
                                 <td>{{ $colum->opisanie }}</td>
-                                <td>{{ \Carbon\Carbon::parse($colum->created_at)->format('d.M.Y H:i') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($colum->created_at)->format('d.m.Y H:i') }}</td>
                                 <td><a href = '{{ route('operplan.'.$zavod.'.show', $colum->id) }}'>Показать на карте</a></td>
                                 <td><a href = '{{ route('operplan.'.$zavod.'.edit', $colum->id) }}'>Изменить</a></td>
-                                <td>
+                                {{--<td>--}}
                                     {{--<a data-toggle="modal" data-id="{{$colum->id}}" href="#" class="user_dialog">Delete</a>--}}
 
                                     {{--<button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal">Standard Modal</button>--}}
-                                    <form method="post" action="{{route('operplan.'.$zavod.'.destroy', $colum->id)}}">
+
+                                    {{--<form method="post" action="{{route('operplan.'.$zavod.'.destroy', $colum->id)}}">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-link">Удалить</button>
-                                    </form>
-                                </td>
+                                    </form>--}}
+                                {{--</td>--}}
                             </tr>
                             @endforeach
                             </tbody>
@@ -62,7 +63,7 @@
                                 <th>Дата</th>
                                 <th>На карте</th>
                                 <th>Изменить</th>
-                                <th>Удалить</th>
+                                {{--<th>Удалить</th>--}}
                             </tr>
                             </tfoot>
                         </table>

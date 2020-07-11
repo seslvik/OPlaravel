@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 class PolimirOperplanController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response|\Illuminate\View\View
@@ -19,7 +29,8 @@ class PolimirOperplanController extends Controller
             ->orderBy('objekt', 'asc')
             ->get();
         $zavod = 'polymir';
-        return view('operplan.operplans', compact( 'colums', 'zavod'));
+        $gde = 'завода "Полимир" ОАО "Нафтан"';
+        return view('operplan.operplans', compact( 'colums', 'zavod', 'gde'));
     }
 
     /**
@@ -58,7 +69,7 @@ class PolimirOperplanController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -82,10 +93,22 @@ class PolimirOperplanController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        //dd(__METHOD__, $id, request()->all());
+        $result = Operplan::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
+        //$user->restore(); //восстановить запись
+        //$operplan->forceDelete(); это окончательно удалит запись из базы данных
+
+        if ($result){
+            /*return redirect()
+                ->route('operplan.operplans')
+                ->with(['success' => 'Запись удалена']);*/
+            return back()->with(['success' => 'Запись удалена', 'id' => $id]);
+        }else{
+            return back()->withErrors(['msg'=> 'Ошибка удаления']);
+        }
     }
 }

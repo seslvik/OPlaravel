@@ -252,7 +252,7 @@ File: Main file css
   }
   #topnav .navigation-menu > li > ul > li.has-submenu:active > a,
   #topnav .navigation-menu > li > ul > li.has-submenu:hover > a {
-    color: #089ce4;
+    color: #03052B
   }
   #topnav .navigation-menu > li .submenu {
     position: absolute;

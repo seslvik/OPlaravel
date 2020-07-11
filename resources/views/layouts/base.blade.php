@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>ОП и ПГ</title>{{--{{ config('app.name', 'Laravel') }}--}}
 
     <!-- App css -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
@@ -58,26 +58,67 @@
                         <li class="has-submenu">
                             <a href="#"><span><i class="ti-spray"></i></span><span> ОП Нафтан </span> </a>
                             <ul class="submenu">
-                                <li><a href="{{ route('operplan.naftan.index')}}">Оперативные планы</a></li>
-                                <li><a href="">Пожарные гидранты</a></li>
+                                <li class="has-submenu">
+                                    <a href="#">Оперативные планы</a>
+                                    <ul class="submenu">
+                                        <li><a href="{{ route('operplan.naftan.index')}}">Просмотр оперпланов</a></li>
+                                        <li><hr></li>
+                                        <li><a href="{{ route('operplan.naftan.create') }}">Добавить оперплан</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="">Пожарные гидранты</a>
+                                    <ul class="submenu">
+                                        <li><a href="">Просмотр гидрантов</a></li>
+                                        <li><hr></li>
+                                        <li><a href="">Добавить гидрант</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="">Границы объектов</a>
+                                    <ul class="submenu">
+                                        <li><a href="">Просмотр объектов</a></li>
+                                        <li><hr></li>
+                                        <li><a href="">Добавить объект</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
 
                         <li class="has-submenu">
                             <a href="#"><span><i class="ti-spray"></i></span><span> ОП Полимир </span> </a>
                             <ul class="submenu">
-                                <li><a href="{{ route('operplan.polymir.index')}}">Оперативные планы</a></li>
-                                <li><a href="">Пожарные гидранты</a></li>
+                                <li class="has-submenu">
+                                    <a href="#">Оперативные планы</a>
+                                    <ul class="submenu">
+                                        <li><a href="{{ route('operplan.polymir.index')}}">Просмотр оперпланов</a></li>
+                                        <li><hr></li>
+                                        <li><a href="">Добавить оперплан</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="">Пожарные гидранты</a>
+                                    <ul class="submenu">
+                                        <li><a href="">Просмотр гидрантов</a></li>
+                                        <li><hr></li>
+                                        <li><a href="">Добавить гидрант</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-submenu">
+                                    <a href="">Границы объектов</a>
+                                    <ul class="submenu">
+                                        <li><a href="">Просмотр объектов</a></li>
+                                        <li><hr></li>
+                                        <li><a href="">Добавить объект</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
 
                         <li class="has-submenu">
-                            <a href="#"> <span><i class="ti-widget"></i></span><span>Редактирование </span> </a>
-                            <ul class="submenu">
-                                <li><a href="">Добавить объект</a></li>
-                                <li><a href="">Удалить  объект</a></li>
-                            </ul>
+                            <a href="#"><span><i></i></span><span></span> </a>
                         </li>
+
                     </ul>
                     <!-- End navigation menu -->
                 </div> <!-- end #navigation -->
@@ -98,18 +139,9 @@
                         <!-- End mobile menu toggle-->
                     </li>
 
-                    <li class="notification-list">
-                        <div class="checkbox checkbox-info form-check-inline mt-4">
-                            <input type="checkbox" id="Checkbox_op" value="0" onchange="Checkboxop()">
-                            <label class="Checkbox_l" for="Checkbox_op"><b> ОП </b></label>
-                        </div>
-                        <div class="checkbox checkbox-warning form-check-inline">
-                            <input type="checkbox" id="Checkbox_pg" value="0" onchange="Checkboxpg()">
-                            <label class="Checkbox_l" for="Checkbox_pg"><b> ПГ </b></label>
-                        </div>
-                    </li>
+                    @yield('checkbox')
 
-                    <li class="dropdown notification-list hide-phone">
+                    {{--<li class="dropdown notification-list hide-phone">
                         <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="false" aria-expanded="false">
                             <i class="mdi mdi-earth"></i> Карта с координатами <i class="mdi mdi-chevron-down"></i>
@@ -125,7 +157,7 @@
                             </a>
 
                         </div>
-                    </li>
+                    </li>--}}
 
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"

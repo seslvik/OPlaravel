@@ -21,7 +21,7 @@ class CreateOperplansTable extends Migration
             $table->string('zavod', 20);
             $table->string('objekt');
             $table->text('opisanie');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->float('pos_x', 4,3);
             $table->float('pos_y', 4,3);
 

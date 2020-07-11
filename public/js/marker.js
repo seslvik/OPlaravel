@@ -1,12 +1,12 @@
 $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
     options: {
         addNote: function(data) {
-            var map = this.map,
+            let map = this.map,
                 loc = this.relposToLatLng(data.x, data.y);
-            var icon = L.icon(data.iconog);
-            var marker = L.marker(loc,{icon: icon}).bindPopup(data.note+"</br><input type=\'button\'  value=\'Скрыть отметку\' class=\'btn-outline-info marker-delete-button\'/>");
+            let icon = L.icon(data.iconog);
+            let marker = L.marker(loc,{icon: icon}).bindPopup(data.note+"</br><input type=\'button\'  value=\'Скрыть отметку\' class=\'btn-outline-info marker-delete-button\'/>");
             marker.on("popupopen", function() {
-                var temp = this;
+                let temp = this;
                 $(".marker-delete-button:visible").click(function () {
                     temp.remove();
                 });
@@ -20,9 +20,31 @@ $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
             }
         },
         delNote: function(data) {
-            var map = this.map;
+            let map = this.map;
             map.removeLayer(data);
 
+        },
+        addPolygon: function(data) {
+            let map = this.map,
+                loc = [], counter  = 0;
+            for (let key in data) {
+                counter++;
+            }
+            for (let el, i = 1; i <= (counter-1)/2; i++) {
+               if(data['x'+i] !== '') {
+                   el = this.relposToLatLng(data['x'+i], data['y'+i]);
+                   loc.push(el)
+               }
+            }
+            let polygon = L.polygon(loc,{color:data.color}).bindPopup(data.note+"</br><input type=\'button\'  value=\'Скрыть\' class=\'btn-outline-info marker-delete-button\'/>");
+            polygon.on("popupopen", function() {
+                let temp = this;
+                $(".marker-delete-button:visible").click(function () {
+                    temp.remove();
+                });
+            });
+            map.addLayer(polygon);
+            markersobj.push(polygon);
         }
     },
 
@@ -42,18 +64,27 @@ $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
                 self.options.delNote.call(self, this);
             });
         }
-    }
+    },
 
+    importobj: function(notes) {
+        if (this.ready) {
+            var self = this;
+            $.each(notes, function() {
+                self.options.addPolygon.call(self, this);
+            });
+        }
+    },
 });
 
 let $imgf = $("#image1").imgNotes2();
 let markersop = [];
 let markerspg = [];
+let markersobj = [];
 
 $.ajax({
     data: {"pokaz_op": "1", "pokaz_pg": "0", "zavod_objekt":"Нафтан"},
     type: "POST",
-    url: "ajax/marker.php",
+    url: "shablon/marker.php",
     dataType:"json",
     success: function(datamap){
         let d = eval(datamap);
@@ -71,7 +102,7 @@ $.ajax({
 $.ajax({
     data: {"pokaz_op": "0", "pokaz_pg": "1", "zavod_objekt":"Нафтан"},
     type: "POST",
-    url: "ajax/marker.php",
+    url: "shablon/marker.php",
     dataType:"json",
     success: function(datamap){
         let d = eval(datamap);
@@ -80,6 +111,26 @@ $.ajax({
             el = eval("(" + d[i] + ")");
             notespg.push(el)
         }
+    },
+    error: function() {
+        alert('Запрос к базе данных вернул ошибку!');
+    }
+});
+
+$.ajax({
+    data: {"pokaz_obj": "1", "zavod_objekt":"Нафтан"},
+    type: "POST",
+    url: "shablon/marker.php",
+    dataType:"json",
+    success: function(datamap){
+        let d = eval(datamap);
+        console.log(datamap);
+        notesobj = [];
+        for (let el, i = 0; i < d.length; i++) {
+            el = eval("(" + d[i] + ")");
+            notesobj.push(el)
+        }
+        console.log(notesobj);
     },
     error: function() {
         alert('Запрос к базе данных вернул ошибку!');
@@ -99,5 +150,16 @@ function Checkboxpg() {
         $imgf.imgNotes2("import", notespg);
     } else {
         $imgf.imgNotes2('clear', markerspg);
+    }
+}
+
+function Checkboxobj() {
+    console.log('111111111111')
+    if ($('#Checkbox_obj').is(':checked')){
+        $("label[for=Checkbox_obj]").text("вкл");
+        $imgf.imgNotes2("importobj",notesobj);
+    } else {
+        $("label[for=Checkbox_obj]").text("выкл");
+        $imgf.imgNotes2('clear', markersobj);
     }
 }
