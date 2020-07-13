@@ -1,12 +1,12 @@
 @extends('layouts.base')
 
 @section('content')
-    @php /** @var \App\Models\Operplan $$colums */ @endphp
+    @php /** @var \App\Models\Gidrant $$colums */ @endphp
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <h4 class="header-title m-t-0 m-b-20">Оперативные планы пожаротушения {{$gde}}</h4>
+                    <h4 class="header-title m-t-0 m-b-20">Пожарные гидранты на территории {{$gde}}</h4>
                 </div>
             </div>
 
@@ -38,19 +38,8 @@
                                 <td><a href = '{{ $colum->file }}' target="_blank">{{ $colum->objekt }}</a></td>
                                 <td>{{ $colum->opisanie }}</td>
                                 <td>{{ \Carbon\Carbon::parse($colum->created_at)->format('d.m.Y H:i') }}</td>
-                                <td><a href = '{{ route('operplan.'.$zavod.'.show', $colum->id) }}'>Показать на карте</a></td>
-                                <td><a href = '{{ route('operplan.'.$zavod.'.edit', $colum->id) }}'>Изменить</a></td>
-                                {{--<td>--}}
-                                    {{--<a data-toggle="modal" data-id="{{$colum->id}}" href="#" class="user_dialog">Delete</a>--}}
-
-                                    {{--<button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#myModal">Standard Modal</button>--}}
-
-                                    {{--<form method="post" action="{{route('operplan.'.$zavod.'.destroy', $colum->id)}}">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-link">Удалить</button>
-                                    </form>--}}
-                                {{--</td>--}}
+                                <td><a href = '{{ route('gidrant.'.$zavod.'.show', $colum->id) }}'>Показать на карте</a></td>
+                                <td><a href = '{{ route('gidrant.'.$zavod.'.edit', $colum->id) }}'>Изменить</a></td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -63,7 +52,6 @@
                                 <th>Дата</th>
                                 <th>На карте</th>
                                 <th>Изменить</th>
-                                {{--<th>Удалить</th>--}}
                             </tr>
                             </tfoot>
                         </table>
@@ -77,27 +65,6 @@
             // Default Datatable
             $('#datatable').DataTable();
         } );
-        /* $(document).on('click', '.user_dialog', function() {
-             let data_id = $(this).data('id');
-             $.ajax({
-                 url: 'data/get-details',
-                 type: 'GET',
-                 data: 'id='+data_id,
-                 dataType: 'JSON',
-                 success: function(data, textStatus, jqXHR){
-                     let name = data.objekt;
-                     $('.modal-body').html('<span>Modal Header ' + name + '</span>');
-                     $('#myModal').modal('show');
-                 },
-                 error: function(jqXHR, textStatus, errorThrown){
 
-                 },
-             });
-       });
-
-         /*$(document).on("click", ".user_dialog", function () {
-             var Userid = $(this).data('id');
-             $(".modal-body #user_id").val( Userid );
-         });*/
     </script>
 @endsection

@@ -69,9 +69,9 @@
                                 <li class="has-submenu">
                                     <a href="">Пожарные гидранты</a>
                                     <ul class="submenu">
-                                        <li><a href="">Просмотр гидрантов</a></li>
+                                        <li><a href="{{ route('gidrant.naftan.index')}}">Просмотр гидрантов</a></li>
                                         <li><hr></li>
-                                        <li><a href="">Добавить гидрант</a></li>
+                                        <li><a href="{{ route('gidrant.naftan.create') }}">Добавить гидрант</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-submenu">
@@ -93,15 +93,15 @@
                                     <ul class="submenu">
                                         <li><a href="{{ route('operplan.polymir.index')}}">Просмотр оперпланов</a></li>
                                         <li><hr></li>
-                                        <li><a href="">Добавить оперплан</a></li>
+                                        <li><a href="{{ route('operplan.polymir.create') }}">Добавить оперплан</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-submenu">
                                     <a href="">Пожарные гидранты</a>
                                     <ul class="submenu">
-                                        <li><a href="">Просмотр гидрантов</a></li>
+                                        <li><a href="{{ route('gidrant.polymir.index')}}">Просмотр гидрантов</a></li>
                                         <li><hr></li>
-                                        <li><a href="">Добавить гидрант</a></li>
+                                        <li><a href="{{ route('gidrant.polymir.create') }}">Добавить гидрант</a></li>
                                     </ul>
                                 </li>
                                 <li class="has-submenu">

@@ -4,8 +4,17 @@
                 aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <i class="mdi mdi-block-helper"></i>
-        <strong>Ошибка!</strong> {{$errors->first()}}
+        {{--<ul>
+            @foreach($errors->all() as $errorTxt)
+                <li><i class="mdi mdi-block-helper"></i>
+                    <strong>Ошибка!</strong>{{$errorTxt}}</li>  $errors->first()
+            @endforeach
+        </ul>--}}
+        @foreach($errors->all() as $errorTxt)
+            <i class="mdi mdi-block-helper"></i>
+            <strong>Ошибка!</strong> {{$errorTxt}}
+            <br>
+        @endforeach
     </div>
 @endif
 

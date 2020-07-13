@@ -16,6 +16,7 @@ class Operplan extends Model
             'opisanie',
             'pos_x',
             'pos_y',
+            'file',
         ];
 
 }

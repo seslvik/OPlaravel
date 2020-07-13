@@ -27,6 +27,7 @@ class OperplanUpdateRequest extends FormRequest
         return [
                 'objekt'    => 'string|required|max:190',
                 'opisanie'  => 'string|required|max:1000',
+                'inputFile' => 'mimes:doc,docx,xls,xlsx,jpg,jpeg,vsd,vsdx',
         ];
     }
 }

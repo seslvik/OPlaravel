@@ -1,8 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
-    @php /** @var \App\Models\Operplan $colums */ @endphp
-    @php /** @var \App\Models\Operplan $zavodlink */ @endphp
+    @php /** @var \App\Models\Gidrant $colums */ @endphp
+    @php /** @var \App\Models\Gidrant $zavodlink */ @endphp
 
     <div class="row pr-3 pl-3 pt-3">
         <div class="col-lg-6">
@@ -17,7 +17,7 @@
 
             <h4 class="text-center">Добавление оперативного плана</h4>
 
-            <form  action="{{ route('operplan.'.$zavodlink.'.store')}}" method="POST" id="formobj" enctype="multipart/form-data" onkeydown="if(event.keyCode==13) {return false;}">
+            <form  action="{{ route('gidrant.'.$zavodlink.'.store')}}" method="POST" id="formobj" enctype="multipart/form-data" onkeydown="if(event.keyCode==13) {return false;}">
                 @csrf
                 <div class="row pr-3 pl-3 pt-3">
                     <div class="col-lg-12 form-group">

@@ -31,10 +31,10 @@ $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
                 counter++;
             }
             for (let el, i = 1; i <= (counter-1)/2; i++) {
-               if(data['x'+i] !== '') {
-                   el = this.relposToLatLng(data['x'+i], data['y'+i]);
-                   loc.push(el)
-               }
+                if(data['x'+i] !== '') {
+                    el = this.relposToLatLng(data['x'+i], data['y'+i]);
+                    loc.push(el)
+                }
             }
             let polygon = L.polygon(loc,{color:data.color}).bindPopup(data.note+"</br><input type=\'button\'  value=\'Скрыть\' class=\'btn-outline-info marker-delete-button\'/>");
             polygon.on("popupopen", function() {
@@ -49,6 +49,7 @@ $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
     },
 
     import: function(notes) {
+
         if (this.ready) {
             var self = this;
             $.each(notes, function() {
@@ -82,9 +83,11 @@ let markerspg = [];
 let markersobj = [];
 
 $.ajax({
-    data: {"pokaz_op": "1", "pokaz_pg": "0", "zavod_objekt":"Нафтан"},
+    data: {"pokaz_op": "1", "pokaz_pg": "0", "pokaz_obj": "0","zavod_objekt":"Нафтан",
+            "iconUrl" : "img/marker-icon.png", "iconRetinaUrl": "img/marker-icon-2x.png", "shadowUrl": "img/marker-shadow.png"},
     type: "POST",
-    url: "shablon/marker.php",
+    url: "/marker",
+    headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
     dataType:"json",
     success: function(datamap){
         let d = eval(datamap);
@@ -93,16 +96,19 @@ $.ajax({
             el = eval("(" + d[i] + ")");
             notesop.push(el)
         }
+        //console.log(notesop);
     },
     error: function() {
-        alert('Запрос к базе данных вернул ошибку!');
+        alert('Запрос к базе данных (ОП) вернул ошибку! Или база данных пуста.');
     }
 });
 
 $.ajax({
-    data: {"pokaz_op": "0", "pokaz_pg": "1", "zavod_objekt":"Нафтан"},
+    data: {"pokaz_op": "0", "pokaz_pg": "1", "pokaz_obj": "0","zavod_objekt":"Нафтан",
+        "iconUrl" : "img/marker-icon_pg.png", "iconRetinaUrl": "img/marker-icon_pg-2x.png", "shadowUrl": "img/marker-shadow.png"},
     type: "POST",
-    url: "shablon/marker.php",
+    url: "/marker",
+    headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
     dataType:"json",
     success: function(datamap){
         let d = eval(datamap);
@@ -113,53 +119,49 @@ $.ajax({
         }
     },
     error: function() {
-        alert('Запрос к базе данных вернул ошибку!');
+        alert('Запрос к базе данных (ПГ) вернул ошибку! Или база данных пуста.');
     }
 });
 
 $.ajax({
-    data: {"pokaz_obj": "1", "zavod_objekt":"Нафтан"},
+    data: {"pokaz_op": "0", "pokaz_pg": "0", "pokaz_obj": "1", "zavod_objekt":"Нафтан"},
     type: "POST",
-    url: "shablon/marker.php",
+    url: "/marker",
+    headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
     dataType:"json",
     success: function(datamap){
         let d = eval(datamap);
-        console.log(datamap);
         notesobj = [];
         for (let el, i = 0; i < d.length; i++) {
             el = eval("(" + d[i] + ")");
             notesobj.push(el)
         }
-        console.log(notesobj);
     },
     error: function() {
-        alert('Запрос к базе данных вернул ошибку!');
+        alert('Запрос к базе данных (границ объектов) вернул ошибку! Или база данных пуста.');
     }
 });
+
 
 function Checkboxop() {
     if ($('#Checkbox_op').is(':checked')){
         $imgf.imgNotes2("import", notesop);
     } else {
         $imgf.imgNotes2('clear', markersop);
-    }
-}
+    }}
 
 function Checkboxpg() {
     if ($('#Checkbox_pg').is(':checked')) {
         $imgf.imgNotes2("import", notespg);
     } else {
         $imgf.imgNotes2('clear', markerspg);
-    }
-}
+    }}
 
 function Checkboxobj() {
-    console.log('111111111111')
     if ($('#Checkbox_obj').is(':checked')){
         $("label[for=Checkbox_obj]").text("вкл");
         $imgf.imgNotes2("importobj",notesobj);
     } else {
         $("label[for=Checkbox_obj]").text("выкл");
         $imgf.imgNotes2('clear', markersobj);
-    }
-}
+    }}

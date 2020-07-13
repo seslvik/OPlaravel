@@ -82,9 +82,10 @@ let markerspg = [];
 let markersobj = [];
 
 $.ajax({
-    data: {"pokaz_op": "1", "pokaz_pg": "0", "zavod_objekt":"Полимир"},
+    data: {"pokaz_op": "1", "pokaz_pg": "0", "pokaz_obj": "0","zavod_objekt":"Полимир", "iconUrl" : "img/marker-icon.png", "iconRetinaUrl": "img/marker-icon-2x.png", "shadowUrl": "img/marker-shadow.png"},
     type: "POST",
-    url: "shablon/marker.php",
+    url: "/marker",
+    headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
     dataType:"json",
     success: function(datamap){
         let d = eval(datamap);
@@ -93,16 +94,18 @@ $.ajax({
             el = eval("(" + d[i] + ")");
             notesop.push(el)
         }
+        //console.log(notesop);
     },
     error: function() {
-        alert('Запрос к базе данных вернул ошибку!');
+        alert('Запрос к базе данных (ОП) вернул ошибку! Или база данных пуста.');
     }
 });
 
 $.ajax({
-    data: {"pokaz_op": "0", "pokaz_pg": "1", "zavod_objekt":"Полимир"},
+    data: {"pokaz_op": "0", "pokaz_pg": "1", "pokaz_obj": "0","zavod_objekt":"Полимир", "iconUrl" : "img/marker-icon_pg.png", "iconRetinaUrl": "img/marker-icon_pg-2x.png", "shadowUrl": "img/marker-shadow.png"},
     type: "POST",
-    url: "shablon/marker.php",
+    url: "/marker",
+    headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
     dataType:"json",
     success: function(datamap){
         let d = eval(datamap);
@@ -113,44 +116,44 @@ $.ajax({
         }
     },
     error: function() {
-        alert('Запрос к базе данных вернул ошибку!');
+        alert('Запрос к базе данных (ПГ) вернул ошибку! Или база данных пуста.');
     }
 });
 
 $.ajax({
-    data: {"pokaz_obj": "1", "zavod_objekt":"Полимир"},
+    data: {"pokaz_op": "0", "pokaz_pg": "0", "pokaz_obj": "1", "zavod_objekt":"Полимир"},
     type: "POST",
-    url: "shablon/marker.php",
+    url: "/marker",
+    headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
     dataType:"json",
     success: function(datamap){
         let d = eval(datamap);
+        console.log(datamap);
         notesobj = [];
         for (let el, i = 0; i < d.length; i++) {
             el = eval("(" + d[i] + ")");
             notesobj.push(el)
         }
-        console.log(notesobj);
     },
     error: function() {
-        alert('Запрос к базе данных вернул ошибку!');
+        alert('Запрос к базе данных (границ объектов) вернул ошибку! Или база данных пуста.');
     }
 });
+
 
 function Checkboxop() {
     if ($('#Checkbox_op').is(':checked')){
         $imgf.imgNotes2("import", notesop);
     } else {
         $imgf.imgNotes2('clear', markersop);
-    }
-}
+    }}
 
 function Checkboxpg() {
     if ($('#Checkbox_pg').is(':checked')) {
         $imgf.imgNotes2("import", notespg);
     } else {
         $imgf.imgNotes2('clear', markerspg);
-    }
-}
+    }}
 
 function Checkboxobj() {
     if ($('#Checkbox_obj').is(':checked')){
@@ -159,5 +162,4 @@ function Checkboxobj() {
     } else {
         $("label[for=Checkbox_obj]").text("выкл");
         $imgf.imgNotes2('clear', markersobj);
-    }
-}
+    }}

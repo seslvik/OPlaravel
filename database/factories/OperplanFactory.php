@@ -11,7 +11,7 @@ $factory->define(Operplan::class, function (Faker $faker) {
     $data = [
         'user_id' => rand(2,8),
         'zavod'         => $faker->randomElement(['Нафтан','Полимир']),//один из элементов массива
-        'objekt'        => $faker->sentence(rand(5,8),true), //предложение от 5 до 8 слов
+        'objekt'        => $faker->realText(rand(10,20)), //текст от 5 до 8 слов
         'opisanie'      => $faker->realText(rand(100,300)),//текст от 500 до 1000 символов
         'file'          => $faker->realText(rand(10,15)),//$faker->file($sourceDir = '/storage', $targetDir = '/storage'), // '/path/to/targetDir/13b73edae8443990be1aa8f1a483bc27.jpg'////текст от 500 до 1000 символов,
         'pos_x'         => $faker->randomFloat(3, 0.01, 0.9),//$faker->randomFloat($nbMaxDecimals = 3, $min = 0.010, $max = 0.999),

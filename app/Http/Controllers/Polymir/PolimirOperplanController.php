@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Polymir;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OperplanCreateRequest;
+use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Operplan;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PolimirOperplanController extends Controller
 {
@@ -36,22 +39,44 @@ class PolimirOperplanController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        $zavod = 'Полимир';
+        $zavodlink = 'polymir';
+        return view('operplan.operplans_create',compact( 'zavod', 'zavodlink'));
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(OperplanCreateRequest $request)
     {
-        //
+        $data = $request->all();
+        if ($request->hasFile('inputFile')){
+            $ras = $request->file('inputFile')->extension();
+            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
+            $url = Storage::url($path);
+            $data['file'] = $url;
+        }
+        $item = new Operplan($data);
+        $item->user_id = auth()->id();
+        $item->zavod = 'Полимир';
+        $item->save();
+        if ($item){
+            return redirect()
+                ->route('operplan.polymir.create')
+                ->with(['success' => 'Успешно сохранено']);
+        }else{
+            return back()
+                ->withErrors(['msg'=> 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
@@ -74,7 +99,8 @@ class PolimirOperplanController extends Controller
     public function edit($id)
     {
         $colums = Operplan::findOrFail($id );
-        return view('operplan.operplans_edit',compact( 'colums'));
+        $zavodlink = 'polymir';
+        return view('operplan.operplans_edit',compact( 'colums', 'zavodlink'));
     }
 
     /**
@@ -82,11 +108,33 @@ class PolimirOperplanController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(OperplanUpdateRequest $request, $id)
     {
-        //
+        $item = Operplan::find($id);
+        if (empty($item)){
+            return back()
+                ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
+                ->withInput();
+        }
+        $data = $request->all();
+        if ($request->hasFile('inputFile')){
+            $ras = $request->file('inputFile')->extension();
+            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
+            $url = Storage::url($path);
+            $data['file'] = $url;
+        }
+        $result = $item->update($data);
+        if ($result){
+            return redirect()
+                ->route('operplan.polymir.edit', $item->id)
+                ->with(['success' => 'Успешно сохранено']);
+        }else{
+            return back()
+                ->withErrors(['msg'=> 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
@@ -97,16 +145,11 @@ class PolimirOperplanController extends Controller
      */
     public function destroy($id)
     {
-        //dd(__METHOD__, $id, request()->all());
-        $result = Operplan::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
-        //$user->restore(); //восстановить запись
-        //$operplan->forceDelete(); это окончательно удалит запись из базы данных
-
+        $result = Operplan::destroy($id);
         if ($result){
-            /*return redirect()
-                ->route('operplan.operplans')
-                ->with(['success' => 'Запись удалена']);*/
-            return back()->with(['success' => 'Запись удалена', 'id' => $id]);
+            return redirect()
+            ->route('operplan.polymir.index')
+                ->with(["success" => "Запись ID=[{$id}] удалена."]);
         }else{
             return back()->withErrors(['msg'=> 'Ошибка удаления']);
         }

@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Naftan;
+namespace App\Http\Controllers\Polymir;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
-use App\Models\Operplan;
+use App\Models\Gidrant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-
-class NaftanOperplanController extends Controller
+class PolymirGidrantController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -29,24 +28,26 @@ class NaftanOperplanController extends Controller
      */
     public function index()
     {
-        $colums = Operplan::where('zavod', 'Нафтан' )
+        $colums = Gidrant::where('zavod', 'Полимир' )
             ->orderBy('objekt', 'asc')
             ->get();
-        $zavod = 'naftan';
-        $gde = 'ОАО "Нафтан"';
-        return view('operplan.operplans', compact( 'colums', 'zavod', 'gde'));
+        $zavod = 'polymir';
+        $gde = 'завода "Полимир" ОАО "Нафтан"';
+        return view('gidrant.gidrans', compact( 'colums', 'zavod', 'gde'));
+
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function create()
     {
-        $zavod = 'Нафтан';
-        $zavodlink = 'naftan';
-        return view('operplan.operplans_create',compact( 'zavod', 'zavodlink'));
+        $zavod = 'Полимир';
+        $zavodlink = 'polymir';
+        return view('gidrant.gidrans_create',compact( 'zavod', 'zavodlink'));
+
     }
 
     /**
@@ -64,19 +65,20 @@ class NaftanOperplanController extends Controller
             $url = Storage::url($path);
             $data['file'] = $url;
         }
-        $item = new Operplan($data);
+        $item = new Gidrant($data);
         $item->user_id = auth()->id();
-        $item->zavod = 'Нафтан';
+        $item->zavod = 'Полимир';
         $item->save();
         if ($item){
             return redirect()
-                ->route('operplan.naftan.create')
+                ->route('gidrant.polymir.create')
                 ->with(['success' => 'Успешно сохранено']);
         }else{
             return back()
                 ->withErrors(['msg'=> 'Ошибка сохранения'])
                 ->withInput();
         }
+
     }
 
     /**
@@ -87,40 +89,38 @@ class NaftanOperplanController extends Controller
      */
     public function show($id)
     {
-        //здесь надо показать маркер оперплана на карте в зависимости от id открыть карту Нафтана или Полимира
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        $colums = Operplan::findOrFail($id);
-        $zavodlink = 'naftan';
-        return view('operplan.operplans_edit',compact( 'colums', 'zavodlink'));
+        $colums = Gidrant::findOrFail($id );
+        $zavodlink = 'polymir';
+        return view('gidrant.gidrans_edit',compact( 'colums', 'zavodlink'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(OperplanUpdateRequest $request, $id) //OperplanUpdateRequest это для валидации данных
+    public function update(OperplanUpdateRequest $request, $id)
     {
-        //dd(__METHOD__, $id, request()->all());
-        $item = Operplan::find($id);
+        $item = Gidrant::find($id);
         if (empty($item)){
             return back()
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
                 ->withInput();
         }
-
         $data = $request->all();
         if ($request->hasFile('inputFile')){
             $ras = $request->file('inputFile')->extension();
@@ -128,15 +128,10 @@ class NaftanOperplanController extends Controller
             $url = Storage::url($path);
             $data['file'] = $url;
         }
-
-            //dd($ras);
-            //dd($path, $data, $url);
         $result = $item->update($data);
-       // $result = $item->fill($data)->save();
-
         if ($result){
             return redirect()
-                ->route('operplan.naftan.edit', $item->id)
+                ->route('gidrant.polymir.edit', $item->id)
                 ->with(['success' => 'Успешно сохранено']);
         }else{
             return back()
@@ -154,19 +149,14 @@ class NaftanOperplanController extends Controller
      */
     public function destroy($id)
     {
-        //dd(__METHOD__, $id, request()->all());
-
-        $result = Operplan::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
-        //$user->restore(); //восстановить запись
-        //$operplan->forceDelete(); это окончательно удалит запись из базы данных
-
+        $result = Gidrant::destroy($id);
         if ($result){
             return redirect()
-                ->route('operplan.naftan.index')
+                ->route('gidrant.polymir.index')
                 ->with(["success" => "Запись ID=[{$id}] удалена."]);
-           /* return back()->with(['success' => 'Запись удалена', 'id' => $id]);*/
         }else{
             return back()->withErrors(['msg'=> 'Ошибка удаления']);
         }
+
     }
 }

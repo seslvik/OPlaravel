@@ -18,7 +18,6 @@
 @endsection
 
 @section('content')
-
     <table  border="0" style="width: 100%; min-width: 320px;">
         <tr>
             <td style="padding: 3px">
@@ -28,4 +27,8 @@
             </td>
         </tr>
     </table>
+
+
+    <script src="{{ asset('js/marker.js') }}"></script>
 @endsection
+

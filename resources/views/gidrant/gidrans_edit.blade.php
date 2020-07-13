@@ -1,8 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
-    @php /** @var \App\Models\Operplan $colums */ @endphp
-    @php /** @var \App\Models\Operplan $zavodlink */ @endphp
+    @php /** @var \App\Models\Gidrant $colums */ @endphp
+    @php /** @var \App\Models\Gidrant $zavodlink */ @endphp
 
     <div class="row pr-3 pl-3 pt-3">
         <div class="col-lg-6">
@@ -15,9 +15,9 @@
 
             @include('includes.result_messages')
 
-            <h4 class="text-center">Изменение (удаление) оперативного плана</h4>
+            <h4 class="text-center">Изменение (удаление) пожарного гидранта</h4>
 
-            <form  action="{{ route('operplan.'.$zavodlink.'.update', $colums->id)}}" method="POST" id="formobj" enctype="multipart/form-data" onkeydown="if(event.keyCode==13) {return false;}">
+            <form  action="{{ route('gidrant.'.$zavodlink.'.update', $colums->id)}}" method="POST" id="formobj" enctype="multipart/form-data" onkeydown="if(event.keyCode==13) {return false;}">
                 @method('PATCH')
                 @csrf
                 <div class="row pr-3 pl-3 pt-3">
@@ -76,13 +76,13 @@
                     </div>
 
                     <div class="col-lg-3 text-center" style="padding-top: 30px">
-                        <a class="btn btn-outline-info" href="{{ route('operplan.'.$zavodlink.'.index')}}" role="button"> Назад </a>
+                        <a class="btn btn-outline-info" href="{{ route('gidrant.'.$zavodlink.'.index')}}" role="button"> Назад </a>
                     </div>
                 </div>
             </form>
 <hr>
             <div class="row pr-3 pl-3">
-                <form method="post" action="{{route('operplan.'.$zavodlink.'.destroy', $colums->id)}}">
+                <form method="post" action="{{route('gidrant.'.$zavodlink.'.destroy', $colums->id)}}">
                     @method('DELETE')
                     @csrf
                     <div class="col-lg-12">

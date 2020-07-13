@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call(UsersTableSeeder::class);
-         factory(Operplan::class, 50)->create();
-         factory(Gidrant::class, 50)->create();
-         factory(Polygon::class, 2)->create();
+         factory(Operplan::class, 10)->create();
+         factory(Gidrant::class, 10)->create();
+         factory(Polygon::class, 8)->create();
     }
 }
