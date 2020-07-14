@@ -29,9 +29,16 @@ class NaftanOperplanController extends Controller
      */
     public function index()
     {
-        $colums = Operplan::where('zavod', 'Нафтан' )
+        /*$colums = Operplan::where('zavod', 'Нафтан' )
+            ->orderBy('objekt', 'asc')                      //это если нет связи по id с другой таблицей
+            ->get();*/
+        $pole = ['id','user_id','zavod','objekt', 'opisanie','file']; //полч обязательны
+        $colums = Operplan::select($pole) //такой запрос уменьшает число обращений к базе
+            ->where('zavod', 'Нафтан')      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
             ->orderBy('objekt', 'asc')
-            ->get();
+            ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
+            ->get(); //для этого необходимо в соответствующей модели создать метод user
+
         $zavod = 'naftan';
         $gde = 'ОАО "Нафтан"';
         return view('operplan.operplans', compact( 'colums', 'zavod', 'gde'));

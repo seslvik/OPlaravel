@@ -26,9 +26,18 @@ class NaftanPolygonController extends Controller
      */
     public function index()
     {
-        $colums = Polygon::where('zavod', 'Нафтан' )
+        /*$colums = Polygon::where('zavod', 'Нафтан' )
             ->orderBy('opisanie', 'asc')
-            ->get();
+            ->get();*/
+
+        $pole = ['id','user_id','zavod','opisanie']; //полч обязательны
+        $colums = Polygon::select($pole) //такой запрос уменьшает число обращений к базе
+        ->where('zavod', 'Нафтан')      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
+        ->orderBy('opisanie', 'asc')
+            ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
+            ->get(); //для этого необходимо в соответствующей модели создать метод user
+
+
         $zavod = 'naftan';
         $gde = 'ОАО "Нафтан"';
         return view('polygon.polygons', compact( 'colums', 'zavod', 'gde'));

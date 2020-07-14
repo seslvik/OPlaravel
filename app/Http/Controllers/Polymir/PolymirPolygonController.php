@@ -22,13 +22,22 @@ class PolymirPolygonController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $colums = Polygon::where('zavod', 'Полимир' )
+        /*$colums = Polygon::where('zavod', 'Полимир' )
             ->orderBy('opisanie', 'asc')
-            ->get();
+            ->get();*/
+
+        $pole = ['id','user_id','zavod','opisanie']; //полч обязательны
+        $colums = Polygon::select($pole) //такой запрос уменьшает число обращений к базе
+        ->where('zavod', 'Полимир')      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
+        ->orderBy('opisanie', 'asc')
+            ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
+            ->get(); //для этого необходимо в соответствующей модели создать метод user
+
+
         $zavod = 'polymir';
         $gde = 'завода "Полимир" ОАО "Нафтан"';
         return view('polygon.polygons', compact( 'colums', 'zavod', 'gde'));

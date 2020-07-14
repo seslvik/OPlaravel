@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -31,4 +32,10 @@ class Polygon extends Model
             'pos_y_8',
 
         ];
+
+    public function user()
+    {
+        //Оперплан принадлежит пользователю
+        return $this->belongsTo(User::class);
+    }
 }

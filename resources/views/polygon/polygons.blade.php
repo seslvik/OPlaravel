@@ -35,7 +35,7 @@
                                     <td>{{$loop->iteration }}</td>
                                     <td>{{ $colum->zavod }}</td>
                                     <td>{{ $colum->opisanie }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($colum->created_at)->format('d.m.Y H:i') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($colum->created_at)->format('d.m.Y H:i') }}  Создатель: {{$colum->user->name}}</td>
                                     <td><a href = '{{ route('polygon.'.$zavod.'.show', $colum->id) }}'>Показать на карте</a></td>
                                     <td><a href = '{{ route('polygon.'.$zavod.'.edit', $colum->id) }}'>Изменить</a></td>
                                     {{--<td>--}}

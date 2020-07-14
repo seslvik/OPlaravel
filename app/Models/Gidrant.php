@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -17,4 +18,10 @@ class Gidrant extends Model
             'pos_y',
             'file',
         ];
+
+    public function user()
+    {
+        //Оперплан принадлежит пользователю
+        return $this->belongsTo(User::class);
+    }
 }

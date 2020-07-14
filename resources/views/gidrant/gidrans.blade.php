@@ -37,7 +37,7 @@
                                 <td>{{ $colum->zavod }}</td>
                                 <td><a href = '{{ $colum->file }}' target="_blank">{{ $colum->objekt }}</a></td>
                                 <td>{{ $colum->opisanie }}</td>
-                                <td>{{ \Carbon\Carbon::parse($colum->created_at)->format('d.m.Y H:i') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($colum->created_at)->format('d.m.Y H:i') }} Создатель: {{$colum->user->name}}</td>
                                 <td><a href = '{{ route('gidrant.'.$zavod.'.show', $colum->id) }}'>Показать на карте</a></td>
                                 <td><a href = '{{ route('gidrant.'.$zavod.'.edit', $colum->id) }}'>Изменить</a></td>
                             </tr>
