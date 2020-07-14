@@ -69,7 +69,7 @@ function Delobj() {
                     el = 'pos_x_'+i;
                     arrinput.push(el);
                 }
-                col = $("#favcolor").val();
+                col = $("#color").val();
                 let k = 0,
                     poly = {};
                 $.each(arrinput, function (index, value) {

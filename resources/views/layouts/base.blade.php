@@ -77,9 +77,9 @@
                                 <li class="has-submenu">
                                     <a href="">Границы объектов</a>
                                     <ul class="submenu">
-                                        <li><a href="">Просмотр объектов</a></li>
+                                        <li><a href="{{ route('polygon.naftan.index')}}">Просмотр объектов</a></li>
                                         <li><hr></li>
-                                        <li><a href="">Добавить объект</a></li>
+                                        <li><a href="{{ route('polygon.naftan.create') }}">Добавить объект</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -107,9 +107,9 @@
                                 <li class="has-submenu">
                                     <a href="">Границы объектов</a>
                                     <ul class="submenu">
-                                        <li><a href="">Просмотр объектов</a></li>
+                                        <li><a href="{{ route('polygon.polymir.index')}}">Просмотр объектов</a></li>
                                         <li><hr></li>
-                                        <li><a href="">Добавить объект</a></li>
+                                        <li><a href="{{ route('polygon.polymir.create') }}">Добавить объект</a></li>
                                     </ul>
                                 </li>
                             </ul>

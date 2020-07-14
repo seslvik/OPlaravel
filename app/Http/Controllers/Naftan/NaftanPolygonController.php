@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Naftan;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\OperplanCreateRequest;
-use App\Http\Requests\OperplanUpdateRequest;
-use App\Models\Gidrant;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\PolygonCreateRequest;
+use App\Http\Requests\PolygonUpdateRequest;
+use App\Models\Polygon;
 
-class NaftanGidrantController extends Controller
+class NaftanPolygonController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,29 +22,29 @@ class NaftanGidrantController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
-        $colums = Gidrant::where('zavod', 'Нафтан' )
-            ->orderBy('objekt', 'asc')
+        $colums = Polygon::where('zavod', 'Нафтан' )
+            ->orderBy('opisanie', 'asc')
             ->get();
         $zavod = 'naftan';
         $gde = 'ОАО "Нафтан"';
-        return view('gidrant.gidrans', compact( 'colums', 'zavod', 'gde'));
+        return view('polygon.polygons', compact( 'colums', 'zavod', 'gde'));
 
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
         $zavod = 'Нафтан';
         $zavodlink = 'naftan';
-        return view('gidrant.gidrans_create',compact( 'zavod', 'zavodlink'));
+        return view('polygon.polygons_create',compact( 'zavod', 'zavodlink'));
 
     }
 
@@ -56,28 +54,23 @@ class NaftanGidrantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(OperplanCreateRequest $request)
+    public function store(PolygonCreateRequest $request)
     {
         $data = $request->all();
-        if ($request->hasFile('inputFile')){
-            $ras = $request->file('inputFile')->extension();
-            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
-            $url = Storage::url($path);
-            $data['file'] = $url;
-        }
-        $item = new Gidrant($data);
+        $item = new Polygon($data);
         $item->user_id = auth()->id();
         $item->zavod = 'Нафтан';
         $item->save();
         if ($item){
             return redirect()
-                ->route('gidrant.naftan.create')
+                ->route('polygon.naftan.create')
                 ->with(['success' => 'Успешно сохранено']);
         }else{
             return back()
                 ->withErrors(['msg'=> 'Ошибка сохранения'])
                 ->withInput();
         }
+
     }
 
     /**
@@ -99,9 +92,10 @@ class NaftanGidrantController extends Controller
      */
     public function edit($id)
     {
-        $colums = Gidrant::findOrFail($id);
+        $colums = Polygon::findOrFail($id);
         $zavodlink = 'naftan';
-        return view('gidrant.gidrans_edit',compact( 'colums', 'zavodlink'));
+
+        return view('polygon.polygons_edit',compact( 'colums', 'zavodlink'));
 
     }
 
@@ -113,12 +107,10 @@ class NaftanGidrantController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(OperplanUpdateRequest $request, $id)
+    public function update(PolygonUpdateRequest $request, $id)
     {
-      //  dd(__METHOD__, $id, request()->all());
-       // $id =55555;
-        $item = Gidrant::find($id);
-        //dd($item);
+        //dd(__METHOD__, $id, request()->all());
+        $item = Polygon::find($id);
         if (empty($item)){
             return back()
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
@@ -126,19 +118,15 @@ class NaftanGidrantController extends Controller
         }
 
         $data = $request->all();
-        //dd($data);
-        if ($request->hasFile('inputFile')){
-            $ras = $request->file('inputFile')->extension();
-            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
-            $url = Storage::url($path);
-            $data['file'] = $url;
-        }
 
+        //dd($ras);
+        //dd($path, $data, $url);
         $result = $item->update($data);
-        //dd($result);
+        // $result = $item->fill($data)->save();
+
         if ($result){
             return redirect()
-                ->route('gidrant.naftan.edit', $item->id)
+                ->route('polygon.naftan.edit', $item->id)
                 ->with(['success' => 'Успешно сохранено']);
         }else{
             return back()
@@ -158,13 +146,13 @@ class NaftanGidrantController extends Controller
     {
         //dd(__METHOD__, $id, request()->all());
 
-        $result = Gidrant::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
+        $result = Polygon::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
         //$user->restore(); //восстановить запись
         //$operplan->forceDelete(); это окончательно удалит запись из базы данных
 
         if ($result){
             return redirect()
-                ->route('gidrant.naftan.index')
+                ->route('operplan.naftan.index')
                 ->with(["success" => "Запись ID=[{$id}] удалена."]);
             /* return back()->with(['success' => 'Запись удалена', 'id' => $id]);*/
         }else{
