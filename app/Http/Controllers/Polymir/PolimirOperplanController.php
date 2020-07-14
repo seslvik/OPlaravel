@@ -83,11 +83,25 @@ class PolimirOperplanController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        $item = Operplan::findOrFail($id);
+        $icon_map = '{ iconUrl: "/img/marker-icon.png",
+                                                iconRetinaUrl:"/img/marker-icon-2x.png",
+                                                shadowUrl:"/img/marker-shadow.png",
+                                                iconSize:[25,41],
+                                                iconAnchor:[12,41],
+                                                popupAnchor:[1,-34],
+                                                tooltipAnchor:[16,-28],
+                                                shadowSize:[41,41]}';
+        $link = 'Оперативный план';
+        $datamap_op = "{x: \"$item->pos_x\", y:\"$item->pos_y\", note: '<center><b>$item->objekt</b><br/></center><a href=\"$item->file\" target=\"blank\">$link</a>'}";
+        $zavodlink = 'Полимир';
+        //dd($datamap_op, $zavodlink, $icon_map);
+        return view('operplan.operplans_show',compact( 'datamap_op', 'zavodlink', "icon_map"));
+
     }
 
     /**

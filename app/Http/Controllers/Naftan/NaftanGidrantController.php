@@ -40,7 +40,7 @@ class NaftanGidrantController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -84,11 +84,23 @@ class NaftanGidrantController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        $item = Gidrant::findOrFail($id);
+        $icon_map = '{ iconUrl: "/img/marker-icon_pg.png",
+                                                iconRetinaUrl:"/img/marker-icon_pg-2x.png",
+                                                shadowUrl:"/img/marker-shadow.png",
+                                                iconSize:[25,41],
+                                                iconAnchor:[12,41],
+                                                popupAnchor:[1,-34],
+                                                tooltipAnchor:[16,-28],
+                                                shadowSize:[41,41]}';
+        $link = 'Пожарный гидрант';
+        $datamap_pg = "{x: \"$item->pos_x\", y:\"$item->pos_y\", note: '<center><b>$item->objekt</b><br/></center><a href=\"$item->file\" target=\"blank\">$link</a>'}";
+        $zavodlink = 'Нафтан';
+        return view('gidrant.gidrants_show',compact( 'datamap_pg', 'zavodlink', 'icon_map'));
     }
 
     /**

@@ -2,7 +2,6 @@
 
 @section('content')
     @php /** @var \App\Models\Gidrant $colums */ @endphp
-    @php /** @var \App\Models\Gidrant $zavodlink */ @endphp
 
     <div class="row pr-3 pl-3 pt-3">
         <div class="col-lg-6">

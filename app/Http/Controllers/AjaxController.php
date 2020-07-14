@@ -23,7 +23,7 @@ class AjaxController extends Controller
      * Обработка Ajax запроса
      *
      * @param \Illuminate\Http\Request $request
-     * @return array
+     * @return false|string
      */
     public function markerAjax(Request $request)
     {

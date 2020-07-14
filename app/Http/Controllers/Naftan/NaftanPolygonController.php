@@ -77,11 +77,35 @@ class NaftanPolygonController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        $item = Polygon::findOrFail($id);
+        $opisanie = $item->opisanie;
+        $color = $item->color;
+        $pos_x_1 = $item->pos_x_1;
+        $pos_y_1 = $item->pos_y_1;
+        $pos_x_2 = $item->pos_x_2;
+        $pos_y_2 = $item->pos_y_2;
+        $pos_x_3 = $item->pos_x_3;
+        $pos_y_3 = $item->pos_y_3;
+        $pos_x_4 = $item->pos_x_4;
+        $pos_y_4 = $item->pos_y_4;
+        $pos_x_5 = $item->pos_x_5;
+        $pos_y_5 = $item->pos_y_5;
+        $pos_x_6 = $item->pos_x_6;
+        $pos_y_6 = $item->pos_y_6;
+        $pos_x_7 = $item->pos_x_7;
+        $pos_y_7 = $item->pos_y_7;
+        $pos_x_8 = $item->pos_x_8;
+        $pos_y_8 = $item->pos_y_8;
+        $datamap_pol = "{x1: \"$pos_x_1\", y1:\"$pos_y_1\", x2: \"$pos_x_2\", y2:\"$pos_y_2\", x3: \"$pos_x_3\", y3:\"$pos_y_3\",
+           x4: \"$pos_x_4\", y4:\"$pos_y_4\", x5: \"$pos_x_5\", y5:\"$pos_y_5\",
+           x6: \"$pos_x_6\", y6:\"$pos_y_6\", x7: \"$pos_x_7\", y7:\"$pos_y_7\", x8: \"$pos_x_8\", y8:\"$pos_y_8\", color: \"$color\", note: '<center><b>$opisanie</b><br/></center>'}";
+        $zavodlink = 'Нафтан';
+        return view('polygon.polygons_show',compact( 'datamap_pol', 'zavodlink'));
+
     }
 
     /**
