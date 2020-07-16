@@ -55,11 +55,11 @@
                             <input type="number" step="0.001" min="0" max="1" name="pos_y_{{$i}}" class="form-control" id="pos_y_{{$i}}" placeholder="x.xxx">
                         </div>
                     @endforeach
-{{$colums->pos_x_1 ?? ''}}
+
                     --}}
                     @for ($i = 1; $i <= 8; $i++)
                         <div class="col-lg-3 form-group mb-0">
-                            <label for="pos_x_{{$i}}">Координата {{$i}} Х</label>
+                            <label for="pos_x_{{$i}}">Координата {{$i}} Х</label>  {{--{{$colums->pos_x_1 ?? ''}}--}}
                             <input type="number" step="0.001" min="0" max="1" name="pos_x_{{$i}}" class="form-control" id="pos_x_{{$i}}" placeholder="x.xxx">
                         </div>
                         <div class="col-lg-3 form-group mb-0">

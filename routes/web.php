@@ -41,5 +41,14 @@ Route::group(['namespace' => 'Polymir', 'prefix' => 'polymir'], function (){
     Route::resource('polygons', 'PolymirPolygonController')->names('polygon.polymir');// +
 });
 
-Route::post('/marker', 'AjaxController@markerAjax')->name('marker');// +
+Route::group(['namespace' => 'User', 'prefix' => 'user'], function (){
+    Route::resource('user', 'UserEditController')->names('user.admin')->only('index')->middleware('auth');// +
+});
+
+Route::post('/marker', 'AjaxController@markerAjax')->name('marker');
+
+Route::post('/user-up-down', 'AjaxController@userUpDownAjax')->name('user-up-down');
+
+Route::post('/user-admin-up-down', 'AjaxController@userAdminUpDownAjax')->name('user-admin-up-down');
+
 

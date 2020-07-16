@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Operplan;
+use App\Repositories\OperplanRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,21 +25,16 @@ class NaftanOperplanController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     *Получаем все оперпланы для вывода в таблицу
+     * @param OperplanRepository $operplanRepository
      * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(OperplanRepository $operplanRepository)
     {
-        /*$colums = Operplan::where('zavod', 'Нафтан' )
-            ->orderBy('objekt', 'asc')                      //это если нет связи по id с другой таблицей
-            ->get();*/
-        $pole = ['id','user_id','zavod','objekt', 'opisanie','file']; //полч обязательны
-        $colums = Operplan::select($pole) //такой запрос уменьшает число обращений к базе
-            ->where('zavod', 'Нафтан')      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
-            ->orderBy('objekt', 'asc')
-            ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
-            ->get(); //для этого необходимо в соответствующей модели создать метод user
-
+        $colums = $operplanRepository->getIndex();
+        if (empty($colums)){
+            abort(404);
+        }
         $zavod = 'naftan';
         $gde = 'ОАО "Нафтан"';
         return view('operplan.operplans', compact( 'colums', 'zavod', 'gde'));
@@ -106,7 +102,6 @@ class NaftanOperplanController extends Controller
         $link = 'Оперативный план';
         $datamap_op = "{x: \"$item->pos_x\", y:\"$item->pos_y\", note: '<center><b>$item->objekt</b><br/></center><a href=\"$item->file\" target=\"blank\">$link</a>'}";
         $zavodlink = 'Нафтан';
-        //dd($datamap_op, $zavodlink, $icon_map);
         return view('operplan.operplans_show',compact( 'datamap_op', 'zavodlink', "icon_map"));
     }
 
@@ -149,8 +144,6 @@ class NaftanOperplanController extends Controller
             $data['file'] = $url;
         }
 
-            //dd($ras);
-            //dd($path, $data, $url);
         $result = $item->update($data);
        // $result = $item->fill($data)->save();
 

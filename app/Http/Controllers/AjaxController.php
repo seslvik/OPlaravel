@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gidrant;
 use App\Models\Polygon;
+use App\User;
 use Illuminate\Http\Request;
 use App\Models\Operplan;
 
@@ -20,14 +21,14 @@ class AjaxController extends Controller
     }
 
     /**
-     * Обработка Ajax запроса
+     * Обработка Ajax запроса для маркеров
      *
      * @param \Illuminate\Http\Request $request
      * @return false|string
      */
     public function markerAjax(Request $request)
     {
-        $items=$request->all();
+        $items = $request->all();
         if ($items['pokaz_op'] == "1") {
             $icon_map_op = '{ iconUrl: "'.$items["iconUrl"].'",
                                             iconRetinaUrl:"'.$items["iconRetinaUrl"].'",
@@ -92,4 +93,55 @@ class AjaxController extends Controller
         }
         return  json_encode($sub);
     }
+
+    /**
+     * Обработка Ajax запроса для активации пользователя
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return false|string
+     */
+    public function userUpDownAjax(Request $request)
+    {
+        $item = $request->all('id_user', 'value');
+        if (isset($item)){
+            $user = User::find($item['id_user']);
+            if (empty($user)){
+                return  "Запись ID=[{$item['id_user']}]не найдена";
+            }
+            $data['admin'] = $item['value'];
+            $result = $user->update($data);
+            if ($result && $item['value'] == '0'){
+                return "Пользователь [{$user->name}] активен!";
+            }elseif ($result && $item['value'] == null){
+                return "Пользователь [{$user->name}] отключен!";
+            }
+        }
+        return "Ошибка сервера!";
+    }
+
+    /**
+     * Обработка Ajax запроса для активации пользователя
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return false|string
+     */
+    public function userAdminUpDownAjax(Request $request)
+    {
+        $item = $request->all('id_admin', 'value');
+        if (isset($item)){
+            $user = User::find($item['id_admin']);
+            if (empty($user)){
+                return  "Запись ID=[{$item['id_admin']}]не найдена";
+            }
+            $data['admin'] = $item['value'];
+            $result = $user->update($data);
+            if ($result && $item['value'] == '0'){
+                return "Права администратора для пользователя [{$user->name}] отключены!";
+            }elseif ($result && $item['value'] == '1'){
+                return "Права администратора для пользователя [{$user->name}] включены!";
+            }
+        }
+        return "Ошибка сервера!";
+    }
+
 }

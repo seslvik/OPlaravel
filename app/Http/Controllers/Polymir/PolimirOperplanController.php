@@ -32,7 +32,7 @@ class PolimirOperplanController extends Controller
             ->orderBy('objekt', 'asc')
             ->get();*/
 
-        $pole = ['id','user_id','zavod','objekt', 'opisanie','file']; //полч обязательны
+        $pole = ['id','user_id','zavod','objekt', 'opisanie','file','updated_at']; //полч обязательны
         $colums = Operplan::select($pole) //такой запрос уменьшает число обращений к базе
         ->where('zavod', 'Полимир')      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
         ->orderBy('objekt', 'asc')

@@ -30,7 +30,7 @@ class PolymirPolygonController extends Controller
             ->orderBy('opisanie', 'asc')
             ->get();*/
 
-        $pole = ['id','user_id','zavod','opisanie']; //полч обязательны
+        $pole = ['id','user_id','zavod','opisanie','updated_at']; //полч обязательны
         $colums = Polygon::select($pole) //такой запрос уменьшает число обращений к базе
         ->where('zavod', 'Полимир')      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
         ->orderBy('opisanie', 'asc')

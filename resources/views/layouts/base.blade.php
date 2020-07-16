@@ -15,6 +15,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/leaflet.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/notifIt.js') }}" rel="stylesheet" type="text/css" />
     <!-- DataTables -->
     <link href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -24,6 +25,7 @@
     <script type="text/javascript" src="{{ asset('js/imgViewer2.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/leaflet.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bs-custom-file-input.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/notifIt.min.js') }}"></script>
 </head>
 <body>
 
@@ -168,6 +170,11 @@
 
                             <!-- item-->
                             <a href="" class="dropdown-item notify-item">
+                                <i class="ti-search"></i> <span>Восстановить объект</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="" class="dropdown-item notify-item">
                                 <i class="ti-user"></i> <span>Добавить пользователя</span>
                             </a>
 
@@ -176,8 +183,10 @@
                                 <i class="ti-lock"></i> <span>Удалить пользователя</span>
                             </a>
 
+
+
                             <!-- item-->
-                            <a href="" class="dropdown-item notify-item">
+                            <a href="{{ route('user.admin.index')}}" class="dropdown-item notify-item">
                                 <i class="ti-settings"></i> <span>Настройки</span>
                             </a>
 
