@@ -19,6 +19,7 @@
                                     <th>Email</th>
                                     <th>Вкл.</th>
                                     <th>Админ</th>
+                                    <th>Удалить</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,6 +39,7 @@
                                         </div>
                                     </td>
                                     <td><div class='checkbox'><input onClick='getinfo_admin({{$colum->id}});' type='checkbox' @if( $colum->admin == 1 ) checked @endempty name='checkbox-{{ $colum->id }}' id='checkbox-{{ $colum->id }}'><label for='checkbox-{{ $colum->id }}'></label></div></td>
+                                    <td></td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -48,6 +50,7 @@
                                 <th>Email</th>
                                 <th>Вкл.</th>
                                 <th>Админ</th>
+                                <th>Удалить</th>
                             </tr>
                             </tfoot>
                         </table>

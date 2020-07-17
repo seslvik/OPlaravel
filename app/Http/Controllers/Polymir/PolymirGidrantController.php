@@ -68,12 +68,7 @@ class PolymirGidrantController extends Controller
     public function store(OperplanCreateRequest $request)
     {
         $data = $request->all();
-        if ($request->hasFile('inputFile')){
-            $ras = $request->file('inputFile')->extension();
-            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
-            $url = Storage::url($path);
-            $data['file'] = $url;
-        }
+        //обработка файла вынесена в Обсервер
         $item = new Gidrant($data);
         $item->user_id = auth()->id();
         $item->zavod = 'Полимир';
@@ -144,12 +139,7 @@ class PolymirGidrantController extends Controller
                 ->withInput();
         }
         $data = $request->all();
-        if ($request->hasFile('inputFile')){
-            $ras = $request->file('inputFile')->extension();
-            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
-            $url = Storage::url($path);
-            $data['file'] = $url;
-        }
+        //обработка файла вынесена в Обсервер
         $result = $item->update($data);
         if ($result){
             return redirect()

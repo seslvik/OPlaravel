@@ -7,9 +7,6 @@ use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Operplan;
 use App\Repositories\OperplanRepository;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-
 
 class NaftanOperplanController extends Controller
 {
@@ -31,7 +28,7 @@ class NaftanOperplanController extends Controller
      */
     public function index(OperplanRepository $operplanRepository)
     {
-        $colums = $operplanRepository->getIndex();
+        $colums = $operplanRepository->getIndex('Нафтан');
         if (empty($colums)){
             abort(404);
         }
@@ -55,18 +52,13 @@ class NaftanOperplanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  OperplanCreateRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(OperplanCreateRequest $request)
     {
         $data = $request->all();
-        if ($request->hasFile('inputFile')){
-            $ras = $request->file('inputFile')->extension();
-            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
-            $url = Storage::url($path);
-            $data['file'] = $url;
-        }
+        //обработка файла вынесена в Обсервер
         $item = new Operplan($data);
         $item->user_id = auth()->id();
         $item->zavod = 'Нафтан';
@@ -84,13 +76,16 @@ class NaftanOperplanController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * @param OperplanRepository $operplanRepository
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(OperplanRepository $operplanRepository, $id)
     {
-        $item = Operplan::findOrFail($id);
+        $item = $operplanRepository->getForShowEditUpdate($id);
+        if (empty($colums)){
+            abort(404);
+        }
         $icon_map = '{ iconUrl: "/img/marker-icon.png",
                                                 iconRetinaUrl:"/img/marker-icon-2x.png",
                                                 shadowUrl:"/img/marker-shadow.png",
@@ -101,19 +96,23 @@ class NaftanOperplanController extends Controller
                                                 shadowSize:[41,41]}';
         $link = 'Оперативный план';
         $datamap_op = "{x: \"$item->pos_x\", y:\"$item->pos_y\", note: '<center><b>$item->objekt</b><br/></center><a href=\"$item->file\" target=\"blank\">$link</a>'}";
+
         $zavodlink = 'Нафтан';
         return view('operplan.operplans_show',compact( 'datamap_op', 'zavodlink', "icon_map"));
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * @param OperplanRepository $operplanRepository
      * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(OperplanRepository $operplanRepository, $id)
     {
-        $colums = Operplan::findOrFail($id);
+       $colums = $operplanRepository->getForShowEditUpdate($id);
+        if (empty($colums)){
+            abort(404);
+        }
         $zavodlink = 'naftan';
         return view('operplan.operplans_edit',compact( 'colums', 'zavodlink'));
     }
@@ -121,15 +120,17 @@ class NaftanOperplanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param OperplanUpdateRequest $request
+     * @param OperplanRepository $operplanRepository
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(OperplanUpdateRequest $request, $id) //OperplanUpdateRequest это для валидации данных
+    public function update(OperplanUpdateRequest $request, OperplanRepository $operplanRepository, $id) //OperplanUpdateRequest это для валидации данных
     {
         //dd(__METHOD__, $id, request()->all());
-        $item = Operplan::find($id);
+
+        $item = $operplanRepository->getForShowEditUpdate($id);
         if (empty($item)){
             return back()
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
@@ -137,15 +138,17 @@ class NaftanOperplanController extends Controller
         }
 
         $data = $request->all();
-        if ($request->hasFile('inputFile')){
+        /*if ($request->hasFile('inputFile')){
             $ras = $request->file('inputFile')->extension();
             $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
             $url = Storage::url($path);
             $data['file'] = $url;
-        }
+        }*/
+
+        //обработка файла вынесена в Обсервер
 
         $result = $item->update($data);
-       // $result = $item->fill($data)->save();
+
 
         if ($result){
             return redirect()

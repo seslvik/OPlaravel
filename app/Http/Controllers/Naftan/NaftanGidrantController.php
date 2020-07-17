@@ -67,12 +67,7 @@ class NaftanGidrantController extends Controller
     public function store(OperplanCreateRequest $request)
     {
         $data = $request->all();
-        if ($request->hasFile('inputFile')){
-            $ras = $request->file('inputFile')->extension();
-            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
-            $url = Storage::url($path);
-            $data['file'] = $url;
-        }
+        //обработка файла вынесена в Обсервер
         $item = new Gidrant($data);
         $item->user_id = auth()->id();
         $item->zavod = 'Нафтан';
@@ -136,26 +131,14 @@ class NaftanGidrantController extends Controller
     public function update(OperplanUpdateRequest $request, $id)
     {
       //  dd(__METHOD__, $id, request()->all());
-       // $id =55555;
         $item = Gidrant::find($id);
-        //dd($item);
         if (empty($item)){
             return back()
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
                 ->withInput();
         }
-
         $data = $request->all();
-        //dd($data);
-        if ($request->hasFile('inputFile')){
-            $ras = $request->file('inputFile')->extension();
-            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
-            $url = Storage::url($path);
-            $data['file'] = $url;
-        }
-
         $result = $item->update($data);
-        //dd($result);
         if ($result){
             return redirect()
                 ->route('gidrant.naftan.edit', $item->id)

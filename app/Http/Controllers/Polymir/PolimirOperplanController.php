@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Operplan;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use App\Repositories\OperplanRepository;
 
 class PolimirOperplanController extends Controller
 {
@@ -23,23 +22,16 @@ class PolimirOperplanController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
+     *Получаем все оперпланы для вывода в таблицу
+     * @param OperplanRepository $operplanRepository
      * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(OperplanRepository $operplanRepository)
     {
-        /*$colums = Operplan::where('zavod', 'Полимир' )
-            ->orderBy('objekt', 'asc')
-            ->get();*/
-
-        $pole = ['id','user_id','zavod','objekt', 'opisanie','file','updated_at']; //полч обязательны
-        $colums = Operplan::select($pole) //такой запрос уменьшает число обращений к базе
-        ->where('zavod', 'Полимир')      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
-        ->orderBy('objekt', 'asc')
-            ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
-            ->get(); //для этого необходимо в соответствующей модели создать метод user
-
-
+        $colums = $operplanRepository->getIndex('Полимир');
+        if (empty($colums)){
+            abort(404);
+        }
         $zavod = 'polymir';
         $gde = 'завода "Полимир" ОАО "Нафтан"';
         return view('operplan.operplans', compact( 'colums', 'zavod', 'gde'));
@@ -67,12 +59,6 @@ class PolimirOperplanController extends Controller
     public function store(OperplanCreateRequest $request)
     {
         $data = $request->all();
-        if ($request->hasFile('inputFile')){
-            $ras = $request->file('inputFile')->extension();
-            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
-            $url = Storage::url($path);
-            $data['file'] = $url;
-        }
         $item = new Operplan($data);
         $item->user_id = auth()->id();
         $item->zavod = 'Полимир';
@@ -90,13 +76,16 @@ class PolimirOperplanController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * @param OperplanRepository $operplanRepository
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(OperplanRepository $operplanRepository, $id)
     {
-        $item = Operplan::findOrFail($id);
+        $item = $operplanRepository->getForShowEditUpdate($id);
+        if (empty($item)){
+            abort(404);
+        }
         $icon_map = '{ iconUrl: "/img/marker-icon.png",
                                                 iconRetinaUrl:"/img/marker-icon-2x.png",
                                                 shadowUrl:"/img/marker-shadow.png",
@@ -108,46 +97,43 @@ class PolimirOperplanController extends Controller
         $link = 'Оперативный план';
         $datamap_op = "{x: \"$item->pos_x\", y:\"$item->pos_y\", note: '<center><b>$item->objekt</b><br/></center><a href=\"$item->file\" target=\"blank\">$link</a>'}";
         $zavodlink = 'Полимир';
-        //dd($datamap_op, $zavodlink, $icon_map);
         return view('operplan.operplans_show',compact( 'datamap_op', 'zavodlink', "icon_map"));
-
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * @param OperplanRepository $operplanRepository
      * @param  int  $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(OperplanRepository $operplanRepository, $id)
     {
-        $colums = Operplan::findOrFail($id );
+        $colums = $operplanRepository->getForShowEditUpdate($id);
+        if (empty($colums)){
+            abort(404);
+        }
         $zavodlink = 'polymir';
         return view('operplan.operplans_edit',compact( 'colums', 'zavodlink'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
+     * @param OperplanRepository $operplanRepository
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(OperplanUpdateRequest $request, $id)
+    public function update(OperplanUpdateRequest $request, OperplanRepository $operplanRepository, $id)
     {
-        $item = Operplan::find($id);
+        $item = $operplanRepository->getForShowEditUpdate($id);
         if (empty($item)){
             return back()
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
                 ->withInput();
         }
         $data = $request->all();
-        if ($request->hasFile('inputFile')){
-            $ras = $request->file('inputFile')->extension();
-            $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
-            $url = Storage::url($path);
-            $data['file'] = $url;
-        }
+        //обработка файла вынесена в Обсервер
         $result = $item->update($data);
         if ($result){
             return redirect()

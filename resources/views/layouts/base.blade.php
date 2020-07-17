@@ -179,11 +179,9 @@
                             </a>
 
                             <!-- item-->
-                            <a href="" class="dropdown-item notify-item">
+                            {{--<a href="" class="dropdown-item notify-item">
                                 <i class="ti-lock"></i> <span>Удалить пользователя</span>
-                            </a>
-
-
+                            </a>--}}
 
                             <!-- item-->
                             <a href="{{ route('user.admin.index')}}" class="dropdown-item notify-item">
