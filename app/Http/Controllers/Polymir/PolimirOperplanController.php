@@ -7,6 +7,7 @@ use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Operplan;
 use App\Repositories\OperplanRepository;
+use App\Services\FileServise;
 
 class PolimirOperplanController extends Controller
 {
@@ -53,13 +54,15 @@ class PolimirOperplanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param OperplanCreateRequest $request
+     * @param FileServise $fileServise
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(OperplanCreateRequest $request)
+    public function store(OperplanCreateRequest $request, FileServise $fileServise)
     {
         $data = $request->all();
         $item = new Operplan($data);
+        $item->file = $fileServise->saveFile($request->file('inputFile'));
         $item->user_id = auth()->id();
         $item->zavod = 'Полимир';
         $item->save();
@@ -118,13 +121,13 @@ class PolimirOperplanController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param OperplanUpdateRequest $request
      * @param OperplanRepository $operplanRepository
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param FileServise $fileServise
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(OperplanUpdateRequest $request, OperplanRepository $operplanRepository, $id)
+    public function update(OperplanUpdateRequest $request, OperplanRepository $operplanRepository, FileServise $fileServise, $id)
     {
         $item = $operplanRepository->getForShowEditUpdate($id);
         if (empty($item)){
@@ -133,7 +136,9 @@ class PolimirOperplanController extends Controller
                 ->withInput();
         }
         $data = $request->all();
-        //обработка файла вынесена в Обсервер
+        if ($request->hasFile('inputFile')){
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+        }
         $result = $item->update($data);
         if ($result){
             return redirect()

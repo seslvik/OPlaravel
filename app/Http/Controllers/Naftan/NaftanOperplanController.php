@@ -7,6 +7,7 @@ use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Operplan;
 use App\Repositories\OperplanRepository;
+use App\Services\FileServise;
 
 class NaftanOperplanController extends Controller
 {
@@ -52,14 +53,17 @@ class NaftanOperplanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  OperplanCreateRequest  $request
+     * @param OperplanCreateRequest $request
+     * @param FileServise $fileServise
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(OperplanCreateRequest $request)
+    public function store(OperplanCreateRequest $request, FileServise $fileServise)
     {
         $data = $request->all();
-        //обработка файла вынесена в Обсервер
+
         $item = new Operplan($data);
+        //обработка файла вынесена в Сервис класс $fileServise
+        $item->file = $fileServise->saveFile($request->file('inputFile'));
         $item->user_id = auth()->id();
         $item->zavod = 'Нафтан';
         $item->save();
@@ -83,7 +87,7 @@ class NaftanOperplanController extends Controller
     public function show(OperplanRepository $operplanRepository, $id)
     {
         $item = $operplanRepository->getForShowEditUpdate($id);
-        if (empty($colums)){
+        if (empty($item)){
             abort(404);
         }
         $icon_map = '{ iconUrl: "/img/marker-icon.png",
@@ -122,11 +126,11 @@ class NaftanOperplanController extends Controller
      *
      * @param OperplanUpdateRequest $request
      * @param OperplanRepository $operplanRepository
+     * @param FileServise $fileServise
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(OperplanUpdateRequest $request, OperplanRepository $operplanRepository, $id) //OperplanUpdateRequest это для валидации данных
+    public function update(OperplanUpdateRequest $request, OperplanRepository $operplanRepository, FileServise $fileServise, $id) //OperplanUpdateRequest это для валидации данных
     {
         //dd(__METHOD__, $id, request()->all());
 
@@ -136,8 +140,13 @@ class NaftanOperplanController extends Controller
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
                 ->withInput();
         }
-
         $data = $request->all();
+        //обработка файла вынесена в Сервис класс $fileServise
+        if ($request->hasFile('inputFile')){
+            $fileServise->deleteFile($item->file); //удаление старого файла
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+            //dd($data['file'],$item->file );
+        }
         /*if ($request->hasFile('inputFile')){
             $ras = $request->file('inputFile')->extension();
             $path = $request->file('inputFile')->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
@@ -145,10 +154,7 @@ class NaftanOperplanController extends Controller
             $data['file'] = $url;
         }*/
 
-        //обработка файла вынесена в Обсервер
-
         $result = $item->update($data);
-
 
         if ($result){
             return redirect()
@@ -165,18 +171,21 @@ class NaftanOperplanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param FileServise $fileServise
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(FileServise $fileServise, OperplanRepository $operplanRepository, $id)
     {
         //dd(__METHOD__, $id, request()->all());
-
+        $item = $operplanRepository->getForShowEditUpdate($id);
         $result = Operplan::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
+
         //$user->restore(); //восстановить запись
         //$operplan->forceDelete(); это окончательно удалит запись из базы данных
 
         if ($result){
+            $fileServise->deleteFile($item->file);
             return redirect()
                 ->route('operplan.naftan.index')
                 ->with(["success" => "Запись ID=[{$id}] удалена."]);

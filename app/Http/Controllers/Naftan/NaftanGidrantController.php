@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Gidrant;
+use App\Services\FileServise;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -64,11 +65,11 @@ class NaftanGidrantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(OperplanCreateRequest $request)
+    public function store(OperplanCreateRequest $request, FileServise $fileServise)
     {
         $data = $request->all();
-        //обработка файла вынесена в Обсервер
         $item = new Gidrant($data);
+        $item->file = $fileServise->saveFile($request->file('inputFile'));
         $item->user_id = auth()->id();
         $item->zavod = 'Нафтан';
         $item->save();
@@ -123,12 +124,12 @@ class NaftanGidrantController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param OperplanUpdateRequest $request
+     * @param FileServise $fileServise
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(OperplanUpdateRequest $request, $id)
+    public function update(OperplanUpdateRequest $request, FileServise $fileServise, $id)
     {
       //  dd(__METHOD__, $id, request()->all());
         $item = Gidrant::find($id);
@@ -138,6 +139,9 @@ class NaftanGidrantController extends Controller
                 ->withInput();
         }
         $data = $request->all();
+        if ($request->hasFile('inputFile')){
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+        }
         $result = $item->update($data);
         if ($result){
             return redirect()

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Gidrant;
+use App\Services\FileServise;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -62,14 +63,15 @@ class PolymirGidrantController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param OperplanCreateRequest $request
+     * @param FileServise $fileServise
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(OperplanCreateRequest $request)
+    public function store(OperplanCreateRequest $request, FileServise $fileServise)
     {
         $data = $request->all();
-        //обработка файла вынесена в Обсервер
         $item = new Gidrant($data);
+        $item->file = $fileServise->saveFile($request->file('inputFile'));
         $item->user_id = auth()->id();
         $item->zavod = 'Полимир';
         $item->save();
@@ -126,11 +128,12 @@ class PolymirGidrantController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param OperplanUpdateRequest $request
+     * @param FileServise $fileServise
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(OperplanUpdateRequest $request, $id)
+    public function update(OperplanUpdateRequest $request,  FileServise $fileServise, $id)
     {
         $item = Gidrant::find($id);
         if (empty($item)){
@@ -139,7 +142,10 @@ class PolymirGidrantController extends Controller
                 ->withInput();
         }
         $data = $request->all();
-        //обработка файла вынесена в Обсервер
+        //обработка файла вынесена в Сервис класс $fileServise
+        if ($request->hasFile('inputFile')){
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+        }
         $result = $item->update($data);
         if ($result){
             return redirect()

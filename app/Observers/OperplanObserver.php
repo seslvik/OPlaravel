@@ -16,13 +16,16 @@ class OperplanObserver
      */
     public function saving(Operplan $operplan)
     {
-        if (request()->hasFile('inputFile')){
+        //здесь можно выполнить любой код непосредственно перед сохранением в базу
+        //я перекину этот код в Сервисы
+
+        /*if (request()->hasFile('inputFile')){
             $addfile = request()->file('inputFile');
             $ras = $addfile->extension();
             $path = $addfile->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
             $url = Storage::url($path);
             $operplan->file = $url;
-        }
+        }*/
     }
 
     /**
