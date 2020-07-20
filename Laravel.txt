@@ -1,0 +1,53 @@
+если в терминале php artisan db:seed и получаю такую ошибку Class ... does not exist тогда ->composer dump-autoload
+
+php artisan make:model Gidrant -f создать фабрику
+php artisan make:model Gidrant -mf создать модель миграцию и фабрику
+php artisan make:seeder GidrantTableSeeder создать сид
+
+запускаем миграцию и сид (пересоздает все таблицы и заполняет данными)
+php artisan migrate:refresh --seed
+
+запускаем сид
+php artisan db:seed --class=UsersTableSeeder
+php artisan db:seed
+
+все маршруты
+php artisan route:list
+
+создать rest контроллер
+php artisan make:controller NameController -r
+
+создание моделеи для работы с БД
+php artisan make:model Name -m
+
+Очистить кэш вьюшек
+view:clear
+
+Для создания символьной ссылки
+php artisan storage:link
+Само собой, когда файл сохранён и создана символьная ссылка, вы можете создать URL к файлу с помощью хелпера asset:
+echo asset('storage/file.txt');
+****************************
+Контроллер не должен заниматься валидацией, поэтому первое, что мы сделаем - создадим Request-класс и перенесем валидацию в него
+Для валидации полученных от пользователя данных создаем request
+php artisan make:request OperplanUpdateRequest
+
+Репозиторий. Он может использоваться только для получения данных. Это по сути надстройка для модели.
+Он создается ручками как обычный класс.
+
+Обсервер для выполнения действий перед или после записи(создания, редактирования) в базу данных т.е. для каждой модели
+php artisan make:observer OperplanObserver --model=Models\Operplan
+Осталось зарегистрировать наблюдателя - пропишем необходимый код в AppServiceProvider:
+public function boot()
+    {
+        Operplan::observe(OperplanObserver::class);
+    }
+
+Выносим бизнес логики в сервис-класс,
+создаем папку Services и в ней у могут располагаться некие классы для обработки чего либо.
+Используя контейнер Laravel, мы внедрим и будем использовать сервис-класс в контроллере. 
+
+Удалить файл после удаления оперплана+
+Удалить пользователя+-
+Вынести логику с контроллера в классы+
+Восстановить удаленные объекты

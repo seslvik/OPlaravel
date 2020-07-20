@@ -19,7 +19,7 @@ function getinfo_no (id) {
         headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
         dataType:"html",
         success: function (data) {
-            $('#checkbox-'+id).prop('checked', false);
+           /* $('#checkbox-'+id).prop('checked', false);*/
             alert(data);
         }
     });
@@ -35,8 +35,8 @@ function getinfo_admin (id) {
             headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
             dataType:"html",
             success: function (data) {
-                $('#radio-'+id+'0001').prop('checked', true);
-                $('#radio-'+id+'0002').prop('checked', false);
+                /*$('#radio-'+id+'0001').prop('checked', true);
+                $('#radio-'+id+'0002').prop('checked', false);*/
                 alert(data);
             }
         });

@@ -15,7 +15,7 @@ class UserEditController extends Controller
      */
     public function index()
     {
-        $pole = ['id','name','email', 'admin',];
+        $pole = ['id','name','email', 'admin', 'activ'];
         $colums = User::select($pole)
             ->orderBy('name', 'asc')
             ->get();
@@ -25,11 +25,11 @@ class UserEditController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        return view('user.user_create');
     }
 
     /**

@@ -174,9 +174,9 @@
                             </a>
 
                             <!-- item-->
-                            <a href="" class="dropdown-item notify-item">
+                            {{--<a href="{{ route('user.admin.create')}}" class="dropdown-item notify-item">
                                 <i class="ti-user"></i> <span>Добавить пользователя</span>
-                            </a>
+                            </a>--}}
 
                             <!-- item-->
                             {{--<a href="" class="dropdown-item notify-item">

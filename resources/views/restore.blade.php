@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <h4 class="header-title m-t-0 m-b-20">Восстановление (окончательное) удаленных объектов</h4>
+                    <h4 class="header-title m-t-0 m-b-20">Восстановление (окончательное удаление) удаленных объектов</h4>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <form  action="" method="GET" >
+                                        <form  action="" method="GET">
                                         @csrf
                                             @foreach($operplans as $operplan)
                                                 <tr>

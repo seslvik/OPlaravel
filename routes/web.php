@@ -53,7 +53,7 @@ Route::group(['namespace' => 'Polymir', 'prefix' => 'polymir'], function (){
 });
 
 Route::group(['namespace' => 'User', 'prefix' => 'user'], function (){
-    Route::resource('user', 'UserEditController')->names('user.admin')->only('index', 'destroy')->middleware('auth');// +
+    Route::resource('user', 'UserEditController')->names('user.admin')->only('index', 'create')->middleware('auth');// +
 });
 
 Route::group(['namespace' => 'Restore'], function (){

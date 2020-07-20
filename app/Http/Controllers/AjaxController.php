@@ -108,7 +108,7 @@ class AjaxController extends Controller
             if (empty($user)){
                 return  "Запись ID=[{$item['id_user']}]не найдена";
             }
-            $data['admin'] = $item['value'];
+            $data['activ'] = $item['value'];
             $result = $user->update($data);
             if ($result && $item['value'] == '0'){
                 return "Пользователь [{$user->name}] активен!";
