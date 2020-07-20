@@ -130,7 +130,6 @@
                                     <tr>
                                         <th>№</th>
                                         <th>Завод</th>
-                                        <th>Объект</th>
                                         <th>Описание объекта</th>
                                         <th>Дата удаления</th>
                                         <th>Восстановить</th>
@@ -144,7 +143,6 @@
                                             <tr>
                                                 <td>{{$loop->iteration }}</td>
                                                 <td>{{ $polygon->zavod }}</td>
-                                                <td><a href = '{{ $polygon->file }}' target="_blank">{{ $polygon->objekt }}</a></td>
                                                 <td>{{ $polygon->opisanie }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($polygon->deleted_at)->format('d.m.Y H:i') }} Создатель: {{$polygon->user->name ?? 'удалён'}}</td>
                                                 @if($polygon->zavod == 'Нафтан')
@@ -163,7 +161,6 @@
                                     <tr>
                                         <th>№</th>
                                         <th>Завод</th>
-                                        <th>Объект</th>
                                         <th>Описание объекта</th>
                                         <th>Дата удаления</th>
                                         <th>Восстановить</th>
