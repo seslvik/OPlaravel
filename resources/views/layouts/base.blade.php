@@ -169,7 +169,7 @@
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 
                             <!-- item-->
-                            <a href="" class="dropdown-item notify-item">
+                            <a href="{{ route('restore.index')}}" class="dropdown-item notify-item">
                                 <i class="ti-search"></i> <span>Восстановить объект</span>
                             </a>
 

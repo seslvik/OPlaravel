@@ -175,17 +175,19 @@ class NaftanOperplanController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(FileServise $fileServise, OperplanRepository $operplanRepository, $id)
+    public function destroy($id)
     {
         //dd(__METHOD__, $id, request()->all());
-        $item = $operplanRepository->getForShowEditUpdate($id);
-        $result = Operplan::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
 
+        /*$item = $operplanRepository->getForShowEditUpdate($id);*///это если удалять без возможности восстановления
+
+        $result = Operplan::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
         //$user->restore(); //восстановить запись
         //$operplan->forceDelete(); это окончательно удалит запись из базы данных
-
         if ($result){
-            $fileServise->deleteFile($item->file);
+
+            /*$fileServise->deleteFile($item->file);*/ //это если удалять без возможности восстановления
+
             return redirect()
                 ->route('operplan.naftan.index')
                 ->with(["success" => "Запись ID=[{$id}] удалена."]);
@@ -194,4 +196,26 @@ class NaftanOperplanController extends Controller
             return back()->withErrors(['msg'=> 'Ошибка удаления']);
         }
     }
+
+    /**
+     * Восстановление оперпланов
+     *
+     * @param FileServise $fileServise
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($id)
+    {
+        $result = Operplan::onlyTrashed()
+            ->where('id', $id)
+            ->restore();//это восстановление
+        if ($result){
+            return redirect()
+                ->route('operplan.naftan.index')
+                ->with(["success" => "Запись ID=[{$id}] восстановлена."]);
+        }else{
+            return back()->withErrors(['msg'=> 'Ошибка восстаносления.']);
+        }
+    }
+
 }

@@ -177,4 +177,27 @@ class PolymirGidrantController extends Controller
         }
 
     }
+
+
+    /**
+     * Восстановление оперпланов
+     *
+     * @param FileServise $fileServise
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($id)
+    {
+        $result = Gidrant::onlyTrashed()
+            ->where('id', $id)
+            ->restore();//это восстановление
+        if ($result){
+            return redirect()
+                ->route('gidrant.polymir.index')
+                ->with(["success" => "Запись ID=[{$id}] восстановлена."]);
+        }else{
+            return back()->withErrors(['msg'=> 'Ошибка восстаносления.']);
+        }
+    }
+
 }

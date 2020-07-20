@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PolygonCreateRequest;
 use App\Http\Requests\PolygonUpdateRequest;
 use App\Models\Polygon;
+use App\Repositories\PolygonRepository;
 
 class NaftanPolygonController extends Controller
 {
@@ -24,18 +25,18 @@ class NaftanPolygonController extends Controller
      *
      * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(PolygonRepository $polygonRepository)
     {
         /*$colums = Polygon::where('zavod', 'Нафтан' )
             ->orderBy('opisanie', 'asc')
             ->get();*/
-
-        $pole = ['id','user_id','zavod','opisanie','updated_at']; //полч обязательны
+        $colums = $polygonRepository->getIndex('Нафтан');
+        /*$pole = ['id','user_id','zavod','opisanie','updated_at']; //полч обязательны
         $colums = Polygon::select($pole) //такой запрос уменьшает число обращений к базе
         ->where('zavod', 'Нафтан')      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
         ->orderBy('opisanie', 'asc')
             ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
-            ->get(); //для этого необходимо в соответствующей модели создать метод user
+            ->get(); //для этого необходимо в соответствующей модели создать метод user*/
 
 
         $zavod = 'naftan';
@@ -185,7 +186,7 @@ class NaftanPolygonController extends Controller
 
         if ($result){
             return redirect()
-                ->route('operplan.naftan.index')
+                ->route('polygon.naftan.index')
                 ->with(["success" => "Запись ID=[{$id}] удалена."]);
             /* return back()->with(['success' => 'Запись удалена', 'id' => $id]);*/
         }else{
@@ -193,4 +194,26 @@ class NaftanPolygonController extends Controller
         }
 
     }
+
+
+    /**
+     * Восстановление оперпланов
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($id)
+    {
+        $result = Polygon::onlyTrashed()
+            ->where('id', $id)
+            ->restore();//это восстановление
+        if ($result){
+            return redirect()
+                ->route('polygon.naftan.index')
+                ->with(["success" => "Запись ID=[{$id}] восстановлена."]);
+        }else{
+            return back()->withErrors(['msg'=> 'Ошибка восстаносления.']);
+        }
+    }
+
 }

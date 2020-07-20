@@ -168,4 +168,25 @@ class PolimirOperplanController extends Controller
             return back()->withErrors(['msg'=> 'Ошибка удаления']);
         }
     }
+
+    /**
+     * Восстановление оперпланов
+     *
+     * @param FileServise $fileServise
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($id)
+    {
+        $result = Operplan::onlyTrashed()
+            ->where('id', $id)
+            ->restore();//это восстановление
+        if ($result){
+            return redirect()
+                ->route('operplan.polymir.index')
+                ->with(["success" => "Запись ID=[{$id}] восстановлена."]);
+        }else{
+            return back()->withErrors(['msg'=> 'Ошибка восстаносления.']);
+        }
+    }
 }

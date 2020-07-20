@@ -3,14 +3,15 @@
 
 namespace App\Repositories;
 
-use App\Models\Operplan as Model;
+
+use App\Models\Gidrant as Model;
 
 /**
- * Create a class OperplanRepository.
+ * Create a class GidrantRepository.
  *
  *@package App/Repositories
  */
-class OperplanRepository extends CoreRepository
+class GidrantRepository extends CoreRepository
 {
     /**
      *
@@ -31,11 +32,11 @@ class OperplanRepository extends CoreRepository
     {
         $pole = ['id','user_id','zavod','objekt', 'opisanie','file','updated_at']; //поля обязательны
         return $this->startConditions()->select($pole) //такой запрос уменьшает число обращений к базе
-                    ->where('zavod', $zavod)      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
-                    ->orderBy('objekt', 'asc')
-                    ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
-                    //->toBase() //не создает модели
-                    ->get(); //для этого необходимо в соответствующей модели создать метод user
+        ->where('zavod', $zavod)      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
+        ->orderBy('objekt', 'asc')
+            ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
+            //->toBase() //не создает модели
+            ->get(); //для этого необходимо в соответствующей модели создать метод user
     }
 
     /**
@@ -64,4 +65,5 @@ class OperplanRepository extends CoreRepository
     {
         return $this->startConditions()->find($id);
     }
+
 }

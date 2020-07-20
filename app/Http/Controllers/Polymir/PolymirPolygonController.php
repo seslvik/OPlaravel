@@ -174,4 +174,25 @@ class PolymirPolygonController extends Controller
             return back()->withErrors(['msg'=> 'Ошибка удаления']);
         }
     }
+
+    /**
+     * Восстановление оперпланов
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($id)
+    {
+        $result = Polygon::onlyTrashed()
+            ->where('id', $id)
+            ->restore();//это восстановление
+        if ($result){
+            return redirect()
+                ->route('polygon.polymir.index')
+                ->with(["success" => "Запись ID=[{$id}] восстановлена."]);
+        }else{
+            return back()->withErrors(['msg'=> 'Ошибка восстаносления.']);
+        }
+    }
+
 }

@@ -1,25 +1,47 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Restore;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Repositories\GidrantRepository;
+use App\Repositories\OperplanRepository;
+use App\Repositories\PolygonRepository;
 use Illuminate\Http\Request;
 
-class UserEditController extends Controller
+class RestoreController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
+     * @param OperplanRepository $operplanRepository
+     * @param GidrantRepository $gidrantRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(OperplanRepository $operplanRepository, GidrantRepository $gidrantRepository, PolygonRepository $polygonRepository)
     {
-        $pole = ['id','name','email', 'admin',];
-        $colums = User::select($pole)
-            ->orderBy('name', 'asc')
-            ->get();
-        return view('user.users_edit', compact( 'colums'));
+        $operplans = $operplanRepository->getRestoreIndex();
+        if (empty($operplans)){
+            abort(404);
+        }
+        $gidrants = $gidrantRepository->getRestoreIndex();
+        if (empty($gidrants)){
+            abort(404);
+        }
+        $polygons = $polygonRepository->getRestoreIndex();
+        if (empty($polygons)){
+            abort(404);
+        }
+        return view('restore', compact( 'operplans', 'gidrants', 'polygons'));
     }
 
     /**
@@ -81,19 +103,10 @@ class UserEditController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $result = User::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
-        //$user->restore(); //восстановить запись
-        //$operplan->forceDelete(); это окончательно удалит запись из базы данных
-        if ($result){
-            return redirect()
-                ->route('user.admin.index')
-                ->with(["success" => "Пользователь ID=[{$id}] удалён."]);
-        }else{
-            return back()->withErrors(['msg'=> 'Ошибка удаления']);
-        }
+        //
     }
 }

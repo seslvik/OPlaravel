@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Gidrant;
+use App\Repositories\GidrantRepository;
 use App\Services\FileServise;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class NaftanGidrantController extends Controller
 {
@@ -25,21 +24,15 @@ class NaftanGidrantController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param GidrantRepository $gidrantRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(GidrantRepository $gidrantRepository)
     {
-        /*$colums = Gidrant::where('zavod', 'Нафтан' )
-            ->orderBy('objekt', 'asc')
-            ->get();*/
-
-        $pole = ['id','user_id','zavod','objekt', 'opisanie','file','updated_at']; //полч обязательны
-        $colums = Gidrant::select($pole) //такой запрос уменьшает число обращений к базе
-        ->where('zavod', 'Нафтан')      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
-        ->orderBy('objekt', 'asc')
-            ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
-            ->get(); //для этого необходимо в соответствующей модели создать метод user
-
+        $colums = $gidrantRepository->getIndex('Нафтан');
+        if (empty($colums)){
+            abort(404);
+        }
         $zavod = 'naftan';
         $gde = 'ОАО "Нафтан"';
         return view('gidrant.gidrans', compact( 'colums', 'zavod', 'gde'));
@@ -87,12 +80,16 @@ class NaftanGidrantController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param GidrantRepository $gidrantRepository
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(GidrantRepository $gidrantRepository, $id)
     {
-        $item = Gidrant::findOrFail($id);
+        $item = $gidrantRepository->getForShowEditUpdate($id);
+        if (empty($item)){
+            abort(404);
+        }
         $icon_map = '{ iconUrl: "/img/marker-icon_pg.png",
                                                 iconRetinaUrl:"/img/marker-icon_pg-2x.png",
                                                 shadowUrl:"/img/marker-shadow.png",
@@ -110,12 +107,16 @@ class NaftanGidrantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param GidrantRepository $gidrantRepository
+     * @param int $id
      * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(GidrantRepository $gidrantRepository, $id)
     {
-        $colums = Gidrant::findOrFail($id);
+        $colums = $gidrantRepository->getForShowEditUpdate($id);
+        if (empty($colums)){
+            abort(404);
+        }
         $zavodlink = 'naftan';
         return view('gidrant.gidrans_edit',compact( 'colums', 'zavodlink'));
 
@@ -125,14 +126,15 @@ class NaftanGidrantController extends Controller
      * Update the specified resource in storage.
      *
      * @param OperplanUpdateRequest $request
+     * @param GidrantRepository $gidrantRepository
      * @param FileServise $fileServise
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(OperplanUpdateRequest $request, FileServise $fileServise, $id)
+    public function update(OperplanUpdateRequest $request, GidrantRepository $gidrantRepository, FileServise $fileServise, $id)
     {
       //  dd(__METHOD__, $id, request()->all());
-        $item = Gidrant::find($id);
+        $item = $gidrantRepository->getForShowEditUpdate($id);
         if (empty($item)){
             return back()
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
@@ -179,4 +181,26 @@ class NaftanGidrantController extends Controller
         }
 
     }
+
+    /**
+     * Восстановление оперпланов
+     *
+     * @param FileServise $fileServise
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore($id)
+    {
+        $result = Gidrant::onlyTrashed()
+            ->where('id', $id)
+            ->restore();//это восстановление
+        if ($result){
+            return redirect()
+                ->route('gidrant.naftan.index')
+                ->with(["success" => "Запись ID=[{$id}] восстановлена."]);
+        }else{
+            return back()->withErrors(['msg'=> 'Ошибка восстаносления.']);
+        }
+    }
+
 }

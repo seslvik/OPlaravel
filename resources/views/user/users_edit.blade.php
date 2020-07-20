@@ -1,11 +1,13 @@
 @extends('layouts.base')
 
 @section('content')
+    @php /** @var User $colums */use App\User; @endphp
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
                     <h4 class="header-title m-t-0 m-b-20">Настройки пользователей</h4>
+                    @include('includes.result_messages')
                 </div>
             </div>
             <div class="row">
@@ -39,7 +41,15 @@
                                         </div>
                                     </td>
                                     <td><div class='checkbox'><input onClick='getinfo_admin({{$colum->id}});' type='checkbox' @if( $colum->admin == 1 ) checked @endempty name='checkbox-{{ $colum->id }}' id='checkbox-{{ $colum->id }}'><label for='checkbox-{{ $colum->id }}'></label></div></td>
-                                    <td></td>
+                                    <td>
+                                        <form method="post" action="{{route('user.admin.destroy', $colum->id)}}">
+                                            @method('DELETE')
+                                            @csrf
+                                            <div class="col-lg-12">
+                                                <button type="submit" class="btn btn-danger">Удалить</button>
+                                            </div>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
