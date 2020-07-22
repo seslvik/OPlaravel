@@ -203,4 +203,26 @@ class NaftanGidrantController extends Controller
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @param GidrantRepository $gidrantRepository
+     * @return string
+     */
+    public function softdestroy($id, GidrantRepository $gidrantRepository)
+    {
+
+        $item = $gidrantRepository->getForForseDelete($id);
+        //dd($item);
+        $item->forceDelete();//это удаление
+        if ($item){
+            return redirect()
+                ->route('restore.index')
+                ->with(["success" => "Запись ID=[{$id}] удалена."]);
+        }else{
+            return back()->withErrors(['msg'=> 'Ошибка удаления.']);
+        }
+    }
+
 }

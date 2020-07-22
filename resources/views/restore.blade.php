@@ -52,9 +52,7 @@
                                                     @else
                                                         <td><a href = '{{ route('operplan.polymir.restore', $operplan->id) }}'>Восстановить</a></td>
                                                     @endif
-
-
-                                                    <td><a href = ''>Удалить</a></td>
+                                                    <td><a href = '{{ route('restore.edit', [$operplan->id, 'operplan']) }}'>Удалить</a></td>
                                                 </tr>
                                             @endforeach
                                         </form>
@@ -102,9 +100,7 @@
                                                 @else
                                                     <td><a href = '{{ route('gidrant.polymir.restore', $gidrant->id) }}'>Восстановить</a></td>
                                                 @endif
-
-
-                                                <td><a href = ''>Удалить</a></td>
+                                                <td><a href = '{{ route('restore.edit', [$gidrant->id, 'gidrant']) }}'>Удалить</a></td>
                                             </tr>
                                         @endforeach
                                     </form>
@@ -152,7 +148,7 @@
                                                 @endif
 
 
-                                                <td><a href = ''>Удалить</a></td>
+                                                <td><a href = '{{ route('restore.edit', [$polygon->id, 'polygon']) }}'>Удалить</a></td>
                                             </tr>
                                         @endforeach
                                     </form>

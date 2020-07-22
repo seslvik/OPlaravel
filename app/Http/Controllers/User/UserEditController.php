@@ -5,21 +5,26 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserEditController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
      */
     public function index()
     {
-        $pole = ['id','name','email', 'admin', 'activ'];
-        $colums = User::select($pole)
-            ->orderBy('name', 'asc')
-            ->get();
-        return view('user.users_edit', compact( 'colums'));
+        if (Auth::user()->admin == '1'){                     //это проверка на админа
+            $pole = ['id','name','email', 'admin', 'activ'];
+            $colums = User::select($pole)
+                ->orderBy('name', 'asc')
+                ->get();
+            return view('user.users_edit', compact( 'colums'));
+        }
+        return abort(404);
+
     }
 
     /**

@@ -47,8 +47,8 @@ class PolygonRepository extends CoreRepository
      */
     public function getRestoreIndex()
     {
-        $pole = ['id','user_id','zavod', 'opisanie','updated_at', 'deleted_at'];
-        return $this->startConditions()->onlyTrashed($pole) //такой запрос показывает только удаленные записи
+       // $pole = ['id','user_id','zavod', 'opisanie','updated_at', 'deleted_at'];
+        return $this->startConditions()->onlyTrashed() //такой запрос показывает только удаленные записи
         ->orderBy('deleted_at', 'desc')
             ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
             //->toBase() //не создает модели
@@ -66,4 +66,17 @@ class PolygonRepository extends CoreRepository
         return $this->startConditions()->find($id);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  int $id
+     * @return Model
+     */
+    public function getForForseDelete($id)
+    {
+       // $pole = ['id','user_id','zavod', 'opisanie','updated_at', 'deleted_at'];
+        return $this->startConditions()->onlyTrashed()
+            ->where('id', $id)
+            ->first();
+    }
 }

@@ -18,6 +18,8 @@ Route::get('/polymir', 'Polymir\PolymirHomeController@index')->name('polymirhome
 
 Route::get('/naftan/operplans/restore/{id}', 'Naftan\NaftanOperplanController@restore')->name('operplan.naftan.restore');
 
+Route::delete('/operplans/softdestroy/{id}', 'Naftan\NaftanOperplanController@softdestroy')->name('operplan.softdestroy');
+
 Route::group(['namespace' => 'Naftan', 'prefix' => 'naftan'], function (){
     Route::resource('operplans', 'NaftanOperplanController')->names('operplan.naftan');// +
 });
@@ -30,6 +32,8 @@ Route::group(['namespace' => 'Polymir', 'prefix' => 'polymir'], function (){
 
 Route::get('/naftan/gidrants/restore/{id}', 'Naftan\NaftanGidrantController@restore')->name('gidrant.naftan.restore');
 
+Route::delete('/gidrants/softdestroy/{id}', 'Naftan\NaftanGidrantController@softdestroy')->name('gidrant.softdestroy');
+
 Route::group(['namespace' => 'Naftan', 'prefix' => 'naftan'], function (){
     Route::resource('gidrants', 'NaftanGidrantController')->names('gidrant.naftan');// +
 });
@@ -41,6 +45,8 @@ Route::group(['namespace' => 'Polymir', 'prefix' => 'polymir'], function (){
 });
 
 Route::get('/naftan/polygons/restore/{id}', 'Naftan\NaftanPolygonController@restore')->name('polygon.naftan.restore');
+
+Route::delete('/polygons/softdestroy/{id}', 'Naftan\NaftanPolygonController@softdestroy')->name('polygon.softdestroy');
 
 Route::group(['namespace' => 'Naftan', 'prefix' => 'naftan'], function (){
     Route::resource('polygons', 'NaftanPolygonController')->names('polygon.naftan');// +
@@ -55,6 +61,8 @@ Route::group(['namespace' => 'Polymir', 'prefix' => 'polymir'], function (){
 Route::group(['namespace' => 'User', 'prefix' => 'user'], function (){
     Route::resource('user', 'UserEditController')->names('user.admin')->only('index', 'create')->middleware('auth');// +
 });
+
+Route::get('restore/{id}/{objekt}/edit', 'Restore\RestoreController@edit')->name('restore.edit');
 
 Route::group(['namespace' => 'Restore'], function (){
     Route::resource('restore', 'RestoreController')->names('restore')->only('index');// +

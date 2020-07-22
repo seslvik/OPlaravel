@@ -184,10 +184,11 @@
                             </a>--}}
 
                             <!-- item-->
-                            <a href="{{ route('user.admin.index')}}" class="dropdown-item notify-item">
-                                <i class="ti-settings"></i> <span>Настройки</span>
-                            </a>
-
+                            @if(Auth::user()->admin == '1')
+                                <a href="{{ route('user.admin.index')}}" class="dropdown-item notify-item">
+                                    <i class="ti-settings"></i> <span>Настройки</span>
+                                </a>
+                            @endif
                             <a class="dropdown-item notify-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

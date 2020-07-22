@@ -218,4 +218,26 @@ class NaftanOperplanController extends Controller
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @param OperplanRepository $operplanRepository
+     * @return string
+     */
+    public function softdestroy($id, OperplanRepository $operplanRepository)
+    {
+
+        $item = $operplanRepository->getForForseDelete($id);
+        //dd($item);
+        $item->forceDelete();//это удаление
+        if ($item){
+            return redirect()
+                ->route('restore.index')
+                ->with(["success" => "Запись ID=[{$id}] удалена."]);
+        }else{
+            return back()->withErrors(['msg'=> 'Ошибка удаления.']);
+        }
+    }
+
 }

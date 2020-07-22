@@ -79,12 +79,43 @@ class RestoreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param $objekt
+     * @param OperplanRepository $operplanRepository
+     * @param GidrantRepository $gidrantRepository
+     * @param PolygonRepository $polygonRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($id, $objekt,
+                         OperplanRepository $operplanRepository,
+                         GidrantRepository $gidrantRepository,
+                         PolygonRepository $polygonRepository)
     {
-        //
+        //dd($id, $objekt);
+        if ($objekt === 'operplan'){
+            $vid_objekta = 'Оперативный план';
+            $colums = $operplanRepository->getForForseDelete($id);
+            if (empty($colums)){
+                abort(404);
+            }
+        }
+        if ($objekt === 'gidrant'){
+            $vid_objekta = 'Пожарный гидрант';
+            $colums = $gidrantRepository->getForForseDelete($id);
+            if (empty($colums)){
+                abort(404);
+            }
+        }
+        if ($objekt === 'polygon') {
+            $vid_objekta = 'Объект';
+            $colums = $polygonRepository->getForForseDelete($id);
+            if (empty($colums)) {
+                abort(404);
+            }
+        }
+           // dd($colums->zavod);
+        return view('restore_delete',  compact('colums', 'objekt', 'vid_objekta'));
+
     }
 
     /**
@@ -107,6 +138,7 @@ class RestoreController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Принудительное удаление одного экземпляра модели...
+        //$flight->forceDelete();
     }
 }
