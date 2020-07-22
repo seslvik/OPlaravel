@@ -208,15 +208,17 @@ class NaftanGidrantController extends Controller
      *
      * @param int $id
      * @param GidrantRepository $gidrantRepository
+     * @param FileServise $fileServise
      * @return string
      */
-    public function softdestroy($id, GidrantRepository $gidrantRepository)
+    public function softdestroy($id, GidrantRepository $gidrantRepository, FileServise $fileServise)
     {
 
         $item = $gidrantRepository->getForForseDelete($id);
         //dd($item);
         $item->forceDelete();//это удаление
         if ($item){
+            $fileServise->deleteFile($item->file);
             return redirect()
                 ->route('restore.index')
                 ->with(["success" => "Запись ID=[{$id}] удалена."]);

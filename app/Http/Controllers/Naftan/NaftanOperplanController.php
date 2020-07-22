@@ -61,8 +61,10 @@ class NaftanOperplanController extends Controller
     {
         $data = $request->all();
 
+       // $lt = Operplan::lastInsertId();
         $item = new Operplan($data);
         //обработка файла вынесена в Сервис класс $fileServise
+       // dd($item->id, $lt);
         $item->file = $fileServise->saveFile($request->file('inputFile'));
         $item->user_id = auth()->id();
         $item->zavod = 'Нафтан';
@@ -223,15 +225,18 @@ class NaftanOperplanController extends Controller
      *
      * @param int $id
      * @param OperplanRepository $operplanRepository
+     * @param FileServise $fileServise
      * @return string
      */
-    public function softdestroy($id, OperplanRepository $operplanRepository)
+    public function softdestroy($id, OperplanRepository $operplanRepository, FileServise $fileServise)
     {
 
         $item = $operplanRepository->getForForseDelete($id);
         //dd($item);
         $item->forceDelete();//это удаление
         if ($item){
+            //dd($item->file);
+            $fileServise->deleteFile($item->file);
             return redirect()
                 ->route('restore.index')
                 ->with(["success" => "Запись ID=[{$id}] удалена."]);

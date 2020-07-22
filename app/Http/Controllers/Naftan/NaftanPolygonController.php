@@ -128,8 +128,27 @@ class NaftanPolygonController extends Controller
     {
         $colums = Polygon::findOrFail($id);
         $zavodlink = 'naftan';
+        $for_pos = [];
+        $for_pos['pos_x_1']= $colums->pos_x_1;
+        $for_pos['pos_y_1']= $colums->pos_y_1;
+        $for_pos['pos_x_2']= $colums->pos_x_2;
+        $for_pos['pos_y_2']= $colums->pos_y_2;
+        $for_pos['pos_x_3']= $colums->pos_x_3;
+        $for_pos['pos_y_3']= $colums->pos_y_3;
+        $for_pos['pos_x_4']= $colums->pos_x_4;
+        $for_pos['pos_y_4']= $colums->pos_y_4;
+        $for_pos['pos_x_5']= $colums->pos_x_5;
+        $for_pos['pos_y_5']= $colums->pos_y_5;
+        $for_pos['pos_x_6']= $colums->pos_x_6;
+        $for_pos['pos_y_6']= $colums->pos_y_6;
+        $for_pos['pos_x_7']= $colums->pos_x_7;
+        $for_pos['pos_y_7']= $colums->pos_y_7;
+        $for_pos['pos_x_8']= $colums->pos_x_8;
+        $for_pos['pos_y_8']= $colums->pos_y_8;
 
-        return view('polygon.polygons_edit',compact( 'colums', 'zavodlink'));
+
+       // dd($colums, $for_pos);
+        return view('polygon.polygons_edit',compact( 'colums', 'zavodlink', 'for_pos'));
 
     }
 
