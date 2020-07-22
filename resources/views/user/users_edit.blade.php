@@ -21,7 +21,6 @@
                                     <th>Email</th>
                                     <th>Вкл.</th>
                                     <th>Админ</th>
-                                    {{--<th>Удалить</th>--}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,15 +40,6 @@
                                         </div>
                                     </td>
                                     <td><div class='checkbox'><input onClick='getinfo_admin({{$colum->id}});' type='checkbox' @if( $colum->admin == 1 ) checked @endempty name='checkbox-{{ $colum->id }}' id='checkbox-{{ $colum->id }}'><label for='checkbox-{{ $colum->id }}'></label></div></td>
-                                    {{--<td>
-                                           <form method="post" action="{{route('user.admin.destroy', $colum->id)}}">
-                                               @method('DELETE')
-                                               @csrf
-                                               <div class="col-lg-12">
-                                                   <button type="submit" class="btn btn-danger">Удалить</button>
-                                               </div>
-                                           </form>
-                                    </td>--}}
                                 </tr>
                             @endforeach
                             </tbody>
@@ -60,7 +50,6 @@
                                 <th>Email</th>
                                 <th>Вкл.</th>
                                 <th>Админ</th>
-                               {{-- <th>Удалить</th>--}}
                             </tr>
                             </tfoot>
                         </table>
@@ -74,11 +63,5 @@
             </div> <!-- end row -->
         </div>
     </div>
-
 <script src="{{ asset('js/users-edit.js') }}"></script>
 @endsection
-
-
-
-
-

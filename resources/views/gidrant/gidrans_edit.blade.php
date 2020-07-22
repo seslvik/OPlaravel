@@ -2,20 +2,15 @@
 
 @section('content')
     @php /** @var \App\Models\Gidrant $colums */ @endphp
-
     <div class="row pr-3 pl-3 pt-3">
         <div class="col-lg-6">
             <div>
                 <img alt="{{$colums->zavod}}"  id="image1" src="{{asset('img/sputnik/'.$colums->zavod.'100.jpg')}}" width="100%" style="border: 10px solid #555; padding:10px;" />
             </div>
         </div>
-
         <div class="col-lg-6">
-
             @include('includes.result_messages')
-
             <h4 class="text-center">Изменение (удаление) пожарного гидранта</h4>
-
             <form  action="{{ route('gidrant.'.$zavodlink.'.update', $colums->id)}}" method="POST" id="formobj" enctype="multipart/form-data" onkeydown="if(event.keyCode==13) {return false;}">
                 @method('PATCH')
                 @csrf
@@ -34,7 +29,6 @@
                     <div class="col-lg-12 form-group">
                         <label for="opisanie">Описание объекта</label>
                         <textarea name="opisanie" class="form-control" id="opisanie" required>{{old('opisanie', $colums->opisanie)}}</textarea>
-
                     </div>
                     <div class="col-lg-12 input-group ">
                         <div class="custom-file">
@@ -54,13 +48,11 @@
                         })
                     </script>
                 </div>
-
                 <div class="row pr-3 pl-3 pt-3">
                     <div class="col-lg-12">
                         <p>Укажите на карте место расположения объекта и его координаты автоматически запишутся в соответствующие поля.
                         Для изменения координат, необходимо повторно указать место на карте.</p>
                     </div>
-
                     <div class="col-lg-3 form-group mb-0">
                         <label for="pos_x">Координата Х</label>
                         <input type="number" step="0.001" min="0" max="1" name="pos_x" class="form-control" id="pos_x" value="{{old('pos_x', $colums->pos_x)}}" required>
@@ -69,17 +61,15 @@
                         <label for="pos_y">Координата Y</label>
                         <input type="number" step="0.001" min="0" max="1" name="pos_y" class="form-control" id="pos_y" value="{{old('pos_y', $colums->pos_y)}}" required>
                     </div>
-
                     <div class="col-lg-3 text-center" style="padding-top: 30px">
                         <button  type="submit"  class="btn btn-info">Сохранить</button>
                     </div>
-
                     <div class="col-lg-3 text-center" style="padding-top: 30px">
                         <a class="btn btn-outline-info" href="{{ route('gidrant.'.$zavodlink.'.index')}}" role="button"> Назад </a>
                     </div>
                 </div>
             </form>
-<hr>
+            <hr>
             <div class="row pr-3 pl-3">
                 <form method="post" action="{{route('gidrant.'.$zavodlink.'.destroy', $colums->id)}}">
                     @method('DELETE')
@@ -90,21 +80,7 @@
                 </form>
             </div>
             <hr>
-                    {{--<div class="col-lg-3 text-center pt-3">
-                        <button type="submit"  class="btn btn-danger">Удалить</button>
-                    </div>--}}
-                    {{--<div class="col-lg-3 text-center pt-4">
-                        <button type="button" name="del_obj" class="btn btn-warning" onclick="Delmarker()">Очистить</button>
-                    </div>--}}
-
-
-
         </div>
     </div>
-
-
-        <script src="{{ asset('js/marker-add.js') }}"></script>
-
-
-
+    <script src="{{ asset('js/marker-add.js') }}"></script>
 @endsection

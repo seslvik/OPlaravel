@@ -3,7 +3,6 @@
 @section('content')
 
 @include('includes.result_messages')
-
         <div class="row">
             <div class="wrapper-page">
                     <div class="card-box">
@@ -25,7 +24,6 @@
                             <div class="col-12">
                                 <label>Описание: <b>{{ $colums->opisanie}}</b></label>
                             </div>
-
                                 <form method="post" action="{{route($objekt.'.softdestroy', $colums->id)}}">
                                     @method('DELETE')
                                     @csrf
@@ -34,10 +32,6 @@
                                         <a class="btn btn-lg btn-success btn-block" href=" {{route('restore.index')}}" role="button"> {{ __('НЕТ') }} </a>
                                     </div>
                                 </form>
-                                {{--<a class="btn btn-lg btn-danger btn-block" href="" role="button"> {{ __('ДА') }} </a>--}}
-
-
-
                         </div>
                     </div>
             </div>

@@ -5,7 +5,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-
                 <div class="wrapper-page">
 
                     <div class="m-t-40 card-box">
@@ -16,9 +15,7 @@
                                 </a>
                                 Регистрация нового пользователя
                             </h6>
-
                         </div>
-
                         <div class="account-content">
                             <form  method="post" class="form-horizontal" action="{{ route('register') }}">
                                 @csrf
@@ -34,7 +31,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="form-group m-b-20">
                                     <div class="col-12">
                                         <label for="email">{{ __('E-Mail Адрес') }}</label>
@@ -47,7 +43,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="form-group m-b-20">
                                     <div class="col-12">
                                         <label for="password">{{ __('Пароль') }}</label>
@@ -59,24 +54,18 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="form-group m-b-20">
                                     <div class="col-12">
                                         <label for="password-confirm">{{ __('Повторите пароль') }}</label>
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                     </div>
                                 </div>
-
                                 <div class="form-group account-btn text-center m-t-10">
                                     <div class="col-12">
                                         <button class="btn btn-lg btn-primary btn-block" type="submit"> {{ __('Регистрация') }}</button>
                                     </div>
                                 </div>
-
                             </form>
-
-                            <div class="clearfix"></div>
-
                         </div>
                     </div>
                     <!-- end card-box-->
@@ -85,4 +74,5 @@
             </div>
         </div>
     </div>
+    <div class="clearfix"></div>
 @endsection

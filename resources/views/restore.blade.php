@@ -9,12 +9,9 @@
                     <h4 class="header-title m-t-0 m-b-20">Восстановление (окончательное удаление) удаленных объектов</h4>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-12">
-
                     @include('includes.result_messages')
-
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Оперативные планы</a>
@@ -167,8 +164,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div> <!-- end row -->
         </div>

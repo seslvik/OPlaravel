@@ -1,5 +1,4 @@
 @extends('layouts.base')
-
 {{--@section('content2')
 <div class="container">
     <div class="row justify-content-center">
@@ -21,13 +20,9 @@
     </div>
 </div>
 @endsection--}}
-
 @section('content')
     <div class="p-t-50">
         <div class="container-fluid">
-
-
-
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card-box">
@@ -39,7 +34,6 @@
                         </div>
                     </div>
                 </div> <!-- end col -->
-
                 <div class="col-lg-6">
                     <div class="card-box">
                         <h6 class="m-t-0">Полимир</h6>
@@ -52,10 +46,6 @@
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
-
-
-
-
         </div> <!-- end container -->
     </div>
     <!-- end wrapper -->

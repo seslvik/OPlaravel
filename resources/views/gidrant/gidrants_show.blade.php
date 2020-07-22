@@ -1,7 +1,6 @@
 @extends('layouts.base')
 
 @section('content')
-
 <table  border="0" style="width: 100%; min-width: 320px;">
     <tr>
         <td style="padding: 3px">
@@ -11,7 +10,6 @@
         </td>
     </tr>
 </table>
-
 <script type="text/javascript">
     ;(function($) {
         $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
@@ -50,5 +48,3 @@
     })(jQuery);
 </script>';
 @endsection
-
-

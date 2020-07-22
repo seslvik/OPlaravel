@@ -1,7 +1,6 @@
 @extends('layouts.base')
 
 @section('content')
-
 <table  border="0" style="width: 100%; min-width: 320px;">
     <tr>
         <td style="padding: 3px">
@@ -11,10 +10,8 @@
         </td>
     </tr>
 </table>
-
 <script type="text/javascript">
     ;(function($) {
-
         $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
             options: {
                  addPolygon: function(data) {
@@ -39,7 +36,6 @@
                     map.addLayer(polygon);
                  }
             },
-
             importobj: function(notes) {
                 if (this.ready) {
                     var self = this;
@@ -49,7 +45,6 @@
                 }
             },
         });
-
         $(document).ready( function() {
             let $img = $("#image1").imgNotes2({
                 onReady: function() {
@@ -62,5 +57,3 @@
 </script>';
 
 @endsection
-
-

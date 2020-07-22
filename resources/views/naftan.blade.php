@@ -27,8 +27,6 @@
             </td>
         </tr>
     </table>
-
-
     <script src="{{ asset('js/marker.js') }}"></script>
 @endsection
 

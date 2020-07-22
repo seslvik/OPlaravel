@@ -14,7 +14,6 @@
 
 <script type="text/javascript">
     ;(function($) {
-
         $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
             options: {
                 addNote: function(data) {
@@ -52,9 +51,7 @@
             });
         });
     })(jQuery);
-
 </script>';
-<!--<script src="{{--{{ asset('js/marker.js') }}--}}"></script>-->
 @endsection
 
 

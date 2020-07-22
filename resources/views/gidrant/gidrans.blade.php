@@ -9,13 +9,9 @@
                     <h4 class="header-title m-t-0 m-b-20">Пожарные гидранты на территории {{$gde}}</h4>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-12">
-
                     @include('includes.result_messages')
-                    {{--include('includes.modal_form')--}}
-
                     <div class="table-responsive">
                         <table id="datatable" class="table table-bordered table-hover table-sm">
                             <thead>
@@ -27,7 +23,6 @@
                                 <th>Дата</th>
                                 <th>На карте</th>
                                 <th>Изменить</th>
-                                {{--<th>Удалить</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -62,9 +57,7 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
-            // Default Datatable
             $('#datatable').DataTable();
         } );
-
     </script>
 @endsection

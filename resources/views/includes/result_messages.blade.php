@@ -4,12 +4,6 @@
                 aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        {{--<ul>
-            @foreach($errors->all() as $errorTxt)
-                <li><i class="mdi mdi-block-helper"></i>
-                    <strong>Ошибка!</strong>{{$errorTxt}}</li>  $errors->first()
-            @endforeach
-        </ul>--}}
         @foreach($errors->all() as $errorTxt)
             <i class="mdi mdi-block-helper"></i>
             <strong>Ошибка!</strong> {{$errorTxt}}
@@ -17,7 +11,6 @@
         @endforeach
     </div>
 @endif
-
 @if(session('success'))
     <div class="alert alert-icon alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert"
