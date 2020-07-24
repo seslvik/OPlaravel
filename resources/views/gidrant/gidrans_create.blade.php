@@ -12,7 +12,7 @@
         </div>
         <div class="col-lg-6">
             @include('includes.result_messages')
-            <h4 class="text-center">Добавление оперативного плана</h4>
+            <h4 class="text-center">Добавление пожарного гидранта</h4>
             <form  action="{{ route('gidrant.'.$zavodlink.'.store')}}" method="POST" id="formobj" enctype="multipart/form-data" onkeydown="if(event.keyCode==13) {return false;}">
                 @csrf
                 <div class="row pr-3 pl-3 pt-3">
@@ -35,7 +35,7 @@
                     <div class="col-lg-12 input-group ">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputFile" name="inputFile" aria-describedby="inputGroupFileAddon" required>
-                            <label class="custom-file-label" for="inputFile">Выбери файл с оперативным планом</label>
+                            <label class="custom-file-label" for="inputFile">Выбери файл с пожарным гидрантом</label>
                         </div>
                     </div>
                     <script>
