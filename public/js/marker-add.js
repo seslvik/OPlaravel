@@ -58,10 +58,19 @@
                 poly["y"] = posy.val();
                 poly["note"] = note;
                 let sub = [poly];
-                /*console.log(poly);*/
+                console.log(sub);
                 $imgp.imgNotes2("clear", markers);
                 $imgp.imgNotes2("import", sub);
             }
         });
+
+        let poly1 = {};
+        poly1["x"] = $("#pos_x").val();
+        poly1["y"] =$("#pos_y").val();
+        poly1["note"] = $("#objekt").val();
+        let sub1 = [poly1];
+        /*console.log(sub1);*/
+        $imgp.imgNotes2("import", sub1);
+
     });
 })(jQuery);

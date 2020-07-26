@@ -35,8 +35,7 @@
                 </div>
                 <div class="row pr-3 pl-3 pt-0">
                     <div class="col-lg-12">
-                        <p>По указанным ниже координатам будет построен многоугольник и показан на карте (при включении
-                            соответствующего фильтра). Максимальное число точек для построения равно 8. </p>
+                        <p>По указанным ниже координатам будет построен многоугольник. Если после загрузки страницы на карте нет маркера, необходимо обновить страницу (F5). </p>
                     </div>
                     @for ($i = 1; $i <= 8; $i++)
                         <div class="col-lg-3 form-group mb-0">
@@ -50,6 +49,9 @@
                     @endfor
                     <div class="col-lg-4 text-center" style="padding-top: 30px">
                         <button  type="submit"  class="btn btn-info">Сохранить</button>
+                    </div>
+                    <div class="col-lg-4 text-center" style="padding-top: 30px">
+                        <button type="button" name="del_obj" class="btn btn-warning" onclick="Delobjposedit()">Очистить</button>
                     </div>
                     <div class="col-lg-4 text-center" style="padding-top: 30px">
                         <a class="btn btn-outline-info" href="{{ route('polygon.'.$zavodlink.'.index')}}" role="button"> Отмена </a>

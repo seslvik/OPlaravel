@@ -1,8 +1,17 @@
 function Delobj() {
     if (!$.isEmptyObject(markersobj)){
-        //console.log('1');
         $imgp.imgNotes2("clear", markersobj);
         $('#formobj')[0].reset();
+    }
+}
+
+function Delobjposedit() {
+    if (!$.isEmptyObject(markersobj)){
+        $imgp.imgNotes2("clear", markersobj);
+    }
+    for (let i = 1; i <= 8; i++) {
+        $("#pos_x_"+(i)).val('');
+        $("#pos_y_"+(i)).val('');
     }
 }
 
@@ -88,10 +97,30 @@ function Delobj() {
                     poly["y"+(index+1)] = posy.val();
                 });
                 let sub = [poly];
+                //console.log(poly);
                 $imgp.imgNotes2("clear", markersobj);
                 $imgp.imgNotes2("importobj", sub);
             }
         });
+//прорисовка объекта при загрузки станицы редактирования
+        let arrinput1 = [];
+        for (let el, i = 1; i <= 8; i++) {
+            el = 'pos_x_'+i;
+            arrinput1.push(el);
+        }
+        col = $("#color").val();
+        let poly1 = {};
+        $.each(arrinput1, function (index, value) {
+            if($("#"+value).val() === '') {
+                return false;
+            }else {
+                poly1["x"+(index+1)] = $("#pos_x_"+(index+1)).val();
+                poly1["y"+(index+1)] = $("#pos_y_"+(index+1)).val();
+            }
+        });
+        let sub1 = [poly1];
+        /*console.log(poly1);*/
+        $imgp.imgNotes2("importobj", sub1);
 
     });
 })(jQuery);
