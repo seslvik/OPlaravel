@@ -60,11 +60,8 @@ class NaftanOperplanController extends Controller
     public function store(OperplanCreateRequest $request, FileServise $fileServise)
     {
         $data = $request->all();
-
-       // $lt = Operplan::lastInsertId();
         $item = new Operplan($data);
-        //обработка файла вынесена в Сервис класс $fileServise
-       // dd($item->id, $lt);
+//        dd($data,$item);
         $item->file = $fileServise->saveFile($request->file('inputFile'));
         $item->user_id = auth()->id();
         $item->zavod = 'Нафтан';

@@ -76,7 +76,13 @@ php artisan storage:link
 установка Laravel
 1. OpenServer (в доменах прописать \operplan.lor\public)
 2. Установить composer 
-3. Установить Laravel через composer
+3. Установить Laravel через php composer.phar и авторизацию с подключением Bootstrap 
+	настроить .env
 4. Разрешения 777 на папки storage и bootstrap/cache
-5. Установить плагин Laravel d PhpStorm; Laravel-ide-helper; запустить команду php composer.phar update
-6. Установить Laravel Debugbar
+5. Установить плагин Laravel d PhpStorm; Laravel-ide-helper; 
+6. Установить Laravel Debugbar или Laravel Telescope
+php composer.phar require php-parallel-lint/php-console-color
+php composer.phar require php-parallel-lint/php-console-highlighter 
+запустить команду php composer.phar update
+
+orchid/platform - плагин(платформа) для создания сайта на основе шаблона администратора
