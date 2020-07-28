@@ -163,7 +163,7 @@ class PolimirOperplanController extends Controller
         if ($result){
             return redirect()
             ->route('operplan.polymir.index')
-                ->with(["success" => "Запись ID=[{$id}] удалена."]);
+                ->with(["success" => "Запись ID=[{$id}] удалена. Для восстановления или окончательного удаления перейдите по ссылке 'Восстановить объект' в меню пользователя."]);
         }else{
             return back()->withErrors(['msg'=> 'Ошибка удаления']);
         }

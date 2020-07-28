@@ -174,7 +174,7 @@ class NaftanGidrantController extends Controller
         if ($result){
             return redirect()
                 ->route('gidrant.naftan.index')
-                ->with(["success" => "Запись ID=[{$id}] удалена."]);
+                ->with(["success" => "Запись ID=[{$id}] удалена. Для восстановления или окончательного удаления перейдите по ссылке 'Восстановить объект' в меню пользователя."]);
             /* return back()->with(['success' => 'Запись удалена', 'id' => $id]);*/
         }else{
             return back()->withErrors(['msg'=> 'Ошибка удаления']);
