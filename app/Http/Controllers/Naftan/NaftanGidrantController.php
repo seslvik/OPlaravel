@@ -142,7 +142,7 @@ class NaftanGidrantController extends Controller
         }
         $data = $request->all();
         if ($request->hasFile('inputFile')){
-            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'), $id);
         }
         $result = $item->update($data);
         if ($result){

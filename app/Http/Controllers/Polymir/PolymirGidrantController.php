@@ -144,7 +144,7 @@ class PolymirGidrantController extends Controller
         $data = $request->all();
         //обработка файла вынесена в Сервис класс $fileServise
         if ($request->hasFile('inputFile')){
-            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'), $id);
         }
         $result = $item->update($data);
         if ($result){

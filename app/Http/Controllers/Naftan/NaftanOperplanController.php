@@ -134,6 +134,7 @@ class NaftanOperplanController extends Controller
         //dd(__METHOD__, $id, request()->all());
 
         $item = $operplanRepository->getForShowEditUpdate($id);
+       // dd(__METHOD__,$item->id);
         if (empty($item)){
             return back()
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
@@ -143,7 +144,7 @@ class NaftanOperplanController extends Controller
         //обработка файла вынесена в Сервис класс $fileServise
         if ($request->hasFile('inputFile')){
             $fileServise->deleteFile($item->file); //удаление старого файла
-            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'), $id);
             //dd($data['file'],$item->file );
         }
         /*if ($request->hasFile('inputFile')){
