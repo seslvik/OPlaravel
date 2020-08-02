@@ -137,7 +137,8 @@ class PolimirOperplanController extends Controller
         }
         $data = $request->all();
         if ($request->hasFile('inputFile')){
-            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+            $fileServise->deleteFile($item->file); //удаление старого файла
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'), $id);
         }
         $result = $item->update($data);
         if ($result){

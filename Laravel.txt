@@ -27,7 +27,10 @@ php artisan view:clear
 php artisan storage:link
 Само собой, когда файл сохранён и создана символьная ссылка, вы можете создать URL к файлу с помощью хелпера asset:
 echo asset('storage/file.txt');
-****************************
+
+Создание страниц с ошибками \resources\views\errors (если хочеш их изменить)
+php artisan vendor:publish --tag=laravel-errors
+****************************************************************
 Контроллер не должен заниматься валидацией, поэтому первое, что мы сделаем - создадим Request-класс и перенесем валидацию в него
 Для валидации полученных от пользователя данных создаем request
 php artisan make:request OperplanUpdateRequest
@@ -44,13 +47,8 @@ public function boot()
     }
 
 Выносим бизнес логики в сервис-класс,
-создаем папку Services и в ней у могут располагаться некие классы для обработки чего либо.
+создаем папку Services и в ней могут располагаться некие классы для обработки чего либо.
 Используя контейнер Laravel, мы внедрим и будем использовать сервис-класс в контроллере. 
-
-Удалить файл после удаления оперплана+
-Удалить пользователя+-
-Вынести логику с контроллера в классы+
-Восстановить удаленные объекты
 
 Аутентификация
 Шлюзы (гейты, gates) - это функции-замыкания, которые определяют, имеет ли пользователь право выполнить данное действие; они обычно определяются в классе App\Providers\AuthServiceProvider с помощью фасада Gate.
@@ -64,19 +62,40 @@ php artisan make:policy PostPolicy --model=Post
 APP_ENV=production
 APP_DEBUG=false
 указываем данные для подключения к БД на сервере
-
 сбрасываем кэш конфигурационных файлов -> php artisan config:cache
+сбрасываем кэш routes:
+1)php artisan route:cache
+2)php artisan route:clear
+Можно вручную решить этот вопрос — уже на хостинге зайти в папку <корневая папка>/bootstrap/cache переименовать файл config.php на config.php_old.
 экспарнтируем БД в файл
-копируем проект на хостинг
+
++++копируем проект на хостинг++++
+
+Разрешения 777 на папки storage и bootstrap/cache
 импорт БД
 в корне сайта создаем .htaccess
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
 
 php artisan storage:link
+
+php composer.phar require php-parallel-lint/php-console-color
+php composer.phar require php-parallel-lint/php-console-highlighter
 --------------------------------------------------------------------------------------------------
 установка Laravel
 1. OpenServer (в доменах прописать \operplan.lor\public)
 2. Установить composer 
-3. Установить Laravel через composer
+3. Установить Laravel через php composer.phar и авторизацию с подключением Bootstrap 
+	настроить .env
 4. Разрешения 777 на папки storage и bootstrap/cache
-5. Установить плагин Laravel d PhpStorm; Laravel-ide-helper; запустить команду php composer.phar update
-6. Установить Laravel Debugbar
+5. Установить плагин Laravel d PhpStorm; Laravel-ide-helper; 
+6. Установить Laravel Debugbar или Laravel Telescope
+запустить команду php composer.phar update
+
+orchid/platform - плагин(платформа) для создания сайта на основе шаблона администратора
+----------------------------------------------------------------------------------------------------
+git clone https://github.com/seslvik/OPlaravel.git . (точка в конце если хочеш клонировать в текущую директорию)
+один раз -> git fetch https://github.com/seslvik/OPlaravel.git (Данная команда связывается с указанным удалённым проектом и забирает все те данные проекта, которых у вас ещё нет. После того как вы выполнили команду, у вас должны появиться ссылки на все ветки из этого удалённого проекта, которые вы можете просмотреть или слить в любой момент.)
+git pull https://github.com/seslvik/OPlaravel.git чтобы автоматически получить изменения из удалённой ветки и слить их со своей текущей. 

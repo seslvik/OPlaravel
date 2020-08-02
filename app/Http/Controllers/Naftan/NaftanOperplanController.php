@@ -146,7 +146,7 @@ class NaftanOperplanController extends Controller
         //обработка файла вынесена в Сервис класс $fileServise
         if ($request->hasFile('inputFile')){
             $fileServise->deleteFile($item->file); //удаление старого файла
-            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'), $id);
             //dd($data['file'],$item->file );
         }
         /*if ($request->hasFile('inputFile')){

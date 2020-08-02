@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Gidrant;
+use App\Repositories\GidrantRepository;
 use App\Services\FileServise;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -129,13 +130,16 @@ class PolymirGidrantController extends Controller
      * Update the specified resource in storage.
      *
      * @param OperplanUpdateRequest $request
+     * @param GidrantRepository $gidrantRepository
      * @param FileServise $fileServise
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(OperplanUpdateRequest $request,  FileServise $fileServise, $id)
+    public function update(OperplanUpdateRequest $request, GidrantRepository $gidrantRepository,  FileServise $fileServise, $id)
     {
-        $item = Gidrant::find($id);
+       // $item = Gidrant::find($id);
+      //  $id =11111;
+        $item = $gidrantRepository->getForShowEditUpdate($id);
         if (empty($item)){
             return back()
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
@@ -144,7 +148,8 @@ class PolymirGidrantController extends Controller
         $data = $request->all();
         //обработка файла вынесена в Сервис класс $fileServise
         if ($request->hasFile('inputFile')){
-            $data['file'] = $fileServise->saveFile($request->file('inputFile'));
+            $fileServise->deleteFile($item->file); //удаление старого файла
+            $data['file'] = $fileServise->saveFile($request->file('inputFile'), $id);
         }
         $result = $item->update($data);
         if ($result){

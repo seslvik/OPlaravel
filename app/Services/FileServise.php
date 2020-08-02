@@ -12,12 +12,18 @@ class FileServise
     /**
      * Сохраняем файл на диск
      *
-     * @param  string  $file
+     * @param string $file
+     * @param int $id
      * @return string
      */
-    public function saveFile($file){
+    public function saveFile($file, $id = 0){
             $ras = $file->extension();
-            $path = $file->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
+            if ($id == 0){
+                $path = $file->storeAs('public', Auth::id() . '_' . date('d_m_Y_H_i_s').'.'.$ras);
+            }else{
+                $path = $file->storeAs('public', $id . '_' . date('d_m_Y_H_i_s').'.'.$ras);
+            }
+
             $url = Storage::url($path);
             return $url;
     }
