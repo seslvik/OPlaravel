@@ -19,7 +19,6 @@ class Operplan extends Model
             'file',
         ];
 
-
     public function user()
     {
         //Оперплан принадлежит пользователю

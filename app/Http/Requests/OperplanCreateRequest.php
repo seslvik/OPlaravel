@@ -29,4 +29,17 @@ class OperplanCreateRequest extends FormRequest
             'inputFile' => 'required|mimes:doc,docx,xls,xlsx,jpg,jpeg,vsd,vsdx',
         ];
     }
+
+    /**
+     * Замена стандартных сообщений об ошибках
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'objekt.required' => 'Поле не должно быть пустым',
+            'opisanie.required'  => 'Поле не должно быть пустым',
+        ];
+    }
 }

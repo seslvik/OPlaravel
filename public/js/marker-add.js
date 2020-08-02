@@ -68,7 +68,8 @@
         poly1["x"] = $("#pos_x").val();
         poly1["y"] =$("#pos_y").val();
         poly1["note"] = $("#objekt").val();
-        let sub1 = [poly1];
+        let sub1 = [];
+        sub1.push(poly1);
         /*console.log(sub1);*/
         $imgp.imgNotes2("import", sub1);
 

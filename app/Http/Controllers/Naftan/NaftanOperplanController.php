@@ -60,11 +60,8 @@ class NaftanOperplanController extends Controller
     public function store(OperplanCreateRequest $request, FileServise $fileServise)
     {
         $data = $request->all();
-
-       // $lt = Operplan::lastInsertId();
         $item = new Operplan($data);
-        //обработка файла вынесена в Сервис класс $fileServise
-       // dd($item->id, $lt);
+//        dd($data,$item);
         $item->file = $fileServise->saveFile($request->file('inputFile'));
         $item->user_id = auth()->id();
         $item->zavod = 'Нафтан';
@@ -115,9 +112,9 @@ class NaftanOperplanController extends Controller
      */
     public function edit(OperplanRepository $operplanRepository, $id)
     {
-       $colums = $operplanRepository->getForShowEditUpdate($id);
+        $colums = $operplanRepository->getForShowEditUpdate($id);
         if (empty($colums)){
-            abort(404);
+            abort(404, 'Страница c ID=['.$id.']не найдена.');
         }
         $zavodlink = 'naftan';
         return view('operplan.operplans_edit',compact( 'colums', 'zavodlink'));
@@ -137,6 +134,7 @@ class NaftanOperplanController extends Controller
         //dd(__METHOD__, $id, request()->all());
 
         $item = $operplanRepository->getForShowEditUpdate($id);
+       // dd(__METHOD__,$item->id);
         if (empty($item)){
             return back()
                 ->withErrors(["msg"=> "Запись ID=[{$id}]не найдена"])
@@ -192,7 +190,7 @@ class NaftanOperplanController extends Controller
 
             return redirect()
                 ->route('operplan.naftan.index')
-                ->with(["success" => "Запись ID=[{$id}] удалена."]);
+                ->with(["success" => "Запись ID=[{$id}] удалена. Для восстановления или окончательного удаления перейдите по ссылке 'Восстановить объект' в меню пользователя."]);
            /* return back()->with(['success' => 'Запись удалена', 'id' => $id]);*/
         }else{
             return back()->withErrors(['msg'=> 'Ошибка удаления']);

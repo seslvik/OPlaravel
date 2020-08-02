@@ -118,7 +118,8 @@ function Delobjposedit() {
                 poly1["y"+(index+1)] = $("#pos_y_"+(index+1)).val();
             }
         });
-        let sub1 = [poly1];
+        let sub1 = [];
+        sub1.push(poly1);
         /*console.log(poly1);*/
         $imgp.imgNotes2("importobj", sub1);
 
