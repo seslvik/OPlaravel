@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    @php /** @var \App\Models\Operplan $$colums */ @endphp
+    @php /** @var \App\Models\Operplan $colums */ @endphp
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">

@@ -33,4 +33,16 @@ class PolygonUpdateRequest extends FormRequest
             'pos_y_3'   => 'required|min:3|max:5',
         ];
     }
+
+    /**
+     * Замена стандартных сообщений об ошибках
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'opisanie.required'  => 'Поле не должно быть пустым',
+        ];
+    }
 }
