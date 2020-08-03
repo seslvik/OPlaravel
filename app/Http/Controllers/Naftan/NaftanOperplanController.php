@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Naftan;
 
+use App\Exports\OperplansExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OperplanCreateRequest;
 use App\Http\Requests\OperplanUpdateRequest;
 use App\Models\Operplan;
 use App\Repositories\OperplanRepository;
 use App\Services\FileServise;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NaftanOperplanController extends Controller
 {
@@ -241,6 +243,11 @@ class NaftanOperplanController extends Controller
         }else{
             return back()->withErrors(['msg'=> 'Ошибка удаления.']);
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new OperplansExport, 'operplans.xlsx');
     }
 
 }

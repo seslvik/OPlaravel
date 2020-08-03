@@ -96,7 +96,13 @@
                             </ul>
                         </li>
                         <li class="has-submenu">
-                            <a href="#"><span><i></i></span><span></span> </a>
+                           {{-- <a href="#"><span><i></i></span><span></span> </a>--}}
+                            <a href="#"><span><i class="ti-export"></i></span><span> Экспорт </span> </a>
+                            <ul class="submenu">
+                                <li><a href="{{ route('operplan.export')}}">Оперпланы в Excell</a></li>
+                                <li><hr></li>
+                                <li><a href="{{ route('gidrant.export')}}">Гидранты в Excell</a></li>
+                            </ul>
                         </li>
                     </ul>
                     <!-- End navigation menu -->
