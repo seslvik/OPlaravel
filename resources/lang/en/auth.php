@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Эти учетные данные не соответствуют нашим записям.',//'These credentials do not match our records.',
-    'throttle' => 'Слишком много попыток входа в систему. Пожалуйста, повторите попытку через: секунды, минуты.',// 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Таких учетных данных не существует или пользователь не активен.',//'These credentials do not match our records.',
+    'throttle' => 'Слишком много попыток входа в систему. Пожалуйста, повторите попытку через: :seconds секунд.',// 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];
