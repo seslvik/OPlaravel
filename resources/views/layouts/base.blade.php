@@ -11,6 +11,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/leaflet.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/morris/morris.css') }}" rel="stylesheet" type="text/css" />
     {{--<link href="{{ asset('css/notifIt.js') }}" rel="stylesheet" type="text/css" />--}}
     <link href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gidrant;
+use App\Models\Operplan;
+use App\Models\Polygon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $operplan_count = Operplan::count();
+        $gidrant_count = Gidrant::count();
+        $object_count = Polygon::count();
+        //dd($operplan_count, $gidrant_count, $object_count);
+        return view('home', compact('operplan_count', 'gidrant_count', 'object_count'));
     }
 
     /**
