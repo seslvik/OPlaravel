@@ -17,7 +17,7 @@ $factory->define(Operplan::class, function (Faker $faker) {
         'pos_x'         => $faker->randomFloat(3, 0.2, 0.8),//$faker->randomFloat($nbMaxDecimals = 3, $min = 0.010, $max = 0.999),
         'pos_y'         => $faker->randomFloat(3,  0.2,  0.8), //$faker->randomFloat($nbMaxDecimals = 0.900, $min = 0.010, $max = 0.999),
         'created_at'    => $faker->dateTimeBetween('-1 months', '-10 days'),//date('d.m.Y',$max = '-2 months'),
-        'updated_at'    => $faker->dateTimeBetween('-9 days', '-1 days'),//date('d.m.Y',$max = '-1 months'),
+        'updated_at'    => $faker->dateTimeBetween('-9 days', '-2 days'),//date('d.m.Y',$max = '-1 months'),
     ];
     return $data;
 });

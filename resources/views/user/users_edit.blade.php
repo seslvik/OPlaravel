@@ -21,6 +21,7 @@
                                     <th>Email</th>
                                     <th>Вкл.</th>
                                     <th>Админ</th>
+                                    <th>Статус</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,7 +40,25 @@
                                             <label class='custom-control-label' for='radio-{{ $colum->id }}0002'>Выкл.</label>
                                         </div>
                                     </td>
-                                    <td><div class='checkbox'><input onClick='getinfo_admin({{$colum->id}});' type='checkbox' @if( $colum->admin == 1 ) checked @endempty name='checkbox-{{ $colum->id }}' id='checkbox-{{ $colum->id }}'><label for='checkbox-{{ $colum->id }}'></label></div></td>
+                                    <td>
+                                        <div class='checkbox'>
+                                            <input onClick='getinfo_admin({{$colum->id}});' type='checkbox' @if( $colum->admin == 1 ) checked @endempty name='checkbox-{{ $colum->id }}' id='checkbox-{{ $colum->id }}'>
+                                            <label for='checkbox-{{ $colum->id }}'></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if( $colum->activ == null )
+                                            <span id="activ-{{$colum->id}}" class="badge badge-pill badge-secondary text-lowercase">не активен</span>
+                                        @else
+                                            <span id="activ-{{$colum->id}}" class="badge badge-pill badge-success text-lowercase">активен</span>
+                                        @endif
+
+                                        @if( $colum->admin == 1 )
+                                            <span id="admin-{{$colum->id}}" class="badge badge-pill badge-danger text-lowercase">admin</span>
+                                        @else
+                                            <span id="admin-{{$colum->id}}" class="badge badge-pill badge-danger text-lowercase" style="display: none">admin</span>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -50,6 +69,7 @@
                                 <th>Email</th>
                                 <th>Вкл.</th>
                                 <th>Админ</th>
+                                <th>Статус</th>
                             </tr>
                             </tfoot>
                         </table>

@@ -6,7 +6,11 @@ function getinfo_yes (id) {
         headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
         dataType:"html",
         success: function (data) {
-            alert(data);
+            let activ = $('#activ-'+id);
+            activ.text('активен');
+            activ.removeClass('badge badge-pill badge-secondary text-lowercase');
+            activ.addClass('badge badge-pill badge-success text-lowercase');
+           // alert(data);
         }
     });
     }
@@ -20,7 +24,11 @@ function getinfo_no (id) {
         dataType:"html",
         success: function (data) {
            /* $('#checkbox-'+id).prop('checked', false);*/
-            alert(data);
+            let activ = $('#activ-'+id);
+            activ.text('не активен');
+            activ.removeClass('badge badge-pill badge-success text-lowercase');
+            activ.addClass('badge badge-pill badge-secondary text-lowercase');
+            //alert(data);
         }
     });
 }
@@ -35,9 +43,12 @@ function getinfo_admin (id) {
             headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
             dataType:"html",
             success: function (data) {
+                let admin = $('#admin-'+id);
+                admin.show();
+               // console.log('da');
                 /*$('#radio-'+id+'0001').prop('checked', true);
                 $('#radio-'+id+'0002').prop('checked', false);*/
-                alert(data);
+                //alert(data);
             }
         });
     } else {
@@ -48,7 +59,10 @@ function getinfo_admin (id) {
             headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
             dataType:"html",
             success: function (data) {
-                alert(data);
+                let admin = $('#admin-'+id);
+                admin.hide();
+               // console.log('net');
+               // alert(data);
             }
         });
     }

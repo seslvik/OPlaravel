@@ -185,7 +185,7 @@ class PolymirPolygonController extends Controller
         $result = Polygon::destroy($id);//это мягкое удаление (записывается дата в поле deleted_at
         if ($result){
             return redirect()
-                ->route('operplan.polymir.index')
+                ->route('polygon.polymir.index')
                 ->with(["success" => "Запись ID=[{$id}] удалена. Для восстановления или окончательного удаления перейдите по ссылке 'Восстановить объект' в меню пользователя."]);
         }else{
             return back()->withErrors(['msg'=> 'Ошибка удаления']);

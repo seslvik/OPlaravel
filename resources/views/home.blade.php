@@ -78,8 +78,8 @@
                 MorrisCharts.prototype.init = function() {
                     //creating donut chart
                     var $donutData = [
-                        {label: "ОП", value: '{{ $operplan_count }}'},
-                        {label: "ПГ", value: '{{ $gidrant_count }}'},
+                        {label: "Оперпланы", value: '{{ $operplan_count }}'},
+                        {label: "Гидранты", value: '{{ $gidrant_count }}'},
                         {label: "Объекты", value: '{{ $object_count }}'}
                     ];
                     this.createDonutChart('morris-donut', $donutData, ['#458bc4','#f2cc5b', '#3db9dc']);
