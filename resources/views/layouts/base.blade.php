@@ -39,7 +39,7 @@
                             <a href="{{ route('home') }}"><span><i class="ti-home"></i></span><span> Домой </span> </a>
                         </li>
                         <li class="has-submenu">
-                            <a href="#"><span><i class="ti-spray"></i></span><span> Нафтан </span> </a>
+                            <a href="{{ route('naftanhome') }}"><span><i class="ti-spray"></i></span><span> Нафтан </span> </a>
                             <ul class="submenu">
                                 <li class="has-submenu">
                                     <a href="#">Оперативные планы</a>
@@ -68,7 +68,7 @@
                             </ul>
                         </li>
                         <li class="has-submenu">
-                            <a href="#"><span><i class="ti-spray"></i></span><span> Полимир </span> </a>
+                            <a href="{{ route('polymirhome') }}"><span><i class="ti-spray"></i></span><span> Полимир </span> </a>
                             <ul class="submenu">
                                 <li class="has-submenu">
                                     <a href="#">Оперативные планы</a>
@@ -128,7 +128,11 @@
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="false" aria-expanded="false">
-                            <img src="{{ asset('img/avatar-2.jpg') }}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"> {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i> </span>
+                            @if(Auth::user()->avatar == 1)
+                                <img src="{{ asset('img/avatar-1.jpg') }}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"> {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i> </span>
+                            @else
+                                <img src="{{ asset('img/avatar-2.jpg') }}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"> {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i> </span>
+                            @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
 

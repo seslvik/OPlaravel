@@ -1,5 +1,5 @@
 @extends('errors::minimal')
 
-@section('title', __('Page Expired'))
+@section('title', __('Веб страница просрочена'))
 @section('code', '419')
-@section('message', __('Страница Просрочена'))
+@section('message', __('Веб Страница Просрочена'))

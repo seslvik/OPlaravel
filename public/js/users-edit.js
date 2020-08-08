@@ -67,3 +67,18 @@ function getinfo_admin (id) {
         });
     }
 }
+
+function getavatar (id, value) {
+    $.ajax({
+        data: {"id_avatar": id, "value": value},
+        type: "POST",
+        url: "/user-avatar",
+        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+        dataType:"html",
+        success: function (data) {
+            if (data === "no"){
+                alert(data);
+            }
+        }
+    });
+}

@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
             'password'  => bcrypt('12345'),
             'admin'     => '1',
             'activ'     => '0',
+            'avatar'     => '1',
         ];
         $cName = 1111;
         for ($i=1; $i<=7; $i++ ) {
@@ -27,6 +28,7 @@ class UsersTableSeeder extends Seeder
                 'password'  => bcrypt($cName),
                 'admin'     => '0',
                 'activ'     => null,
+                'avatar'     => '2',
                 ];
             $cName = $cName+1111;
         }

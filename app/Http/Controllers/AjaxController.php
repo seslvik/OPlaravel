@@ -120,7 +120,7 @@ class AjaxController extends Controller
     }
 
     /**
-     * Обработка Ajax запроса для активации пользователя
+     * Обработка Ajax запроса для активации администратора
      *
      * @param \Illuminate\Http\Request $request
      * @return false|string
@@ -142,6 +142,24 @@ class AjaxController extends Controller
             }
         }
         return "Ошибка сервера!";
+    }
+
+    /**
+     * Обработка Ajax запроса для активации администратора
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return false|string
+     */
+    public function userAvatarAjax(Request $request)
+    {
+        $item = $request->all('id_avatar', 'value');
+        if (isset($item)){
+            $user = User::find($item['id_avatar']);
+            $data['avatar'] = $item['value'];
+            $user->update($data);
+            return "yes";
+        }
+        return "no";
     }
 
 }

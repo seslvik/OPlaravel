@@ -17,10 +17,11 @@ class UserEditController extends Controller
     public function index()
     {
         if (Auth::user()->admin == '1'){                     //это проверка на админа
-            $pole = ['id','name','email', 'admin', 'activ'];
+            $pole = ['id','name','email', 'admin', 'activ', 'avatar'];
             $colums = User::select($pole)
                 ->orderBy('name', 'asc')
                 ->get();
+           // dd($colums);
             return view('user.users_edit', compact( 'colums'));
         }
         return abort(404);

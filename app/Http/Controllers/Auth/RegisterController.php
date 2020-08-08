@@ -88,7 +88,7 @@ class RegisterController extends Controller
      * Handle a registration request for the application.
      *переделали данный метод для отключения автомотического входа после регистрации
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function register(Request $request)
     {
