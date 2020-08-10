@@ -43,7 +43,7 @@
                                                     <td>{{ $operplan->zavod }}</td>
                                                     <td><a href = '{{ $operplan->file }}' target="_blank">{{ $operplan->objekt }}</a></td>
                                                     <td>{{ $operplan->opisanie }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($operplan->deleted_at)->format('d.m.Y H:i') }} Создатель: {{$operplan->user->name ?? 'удалён'}}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($operplan->deleted_at)->format('d.m.Y H:i') }} Создатель: {{$operplan->user->firstname ?? 'удалён'}}</td>
                                                     @if($operplan->zavod == 'Нафтан')
                                                         <td><a href = '{{ route('operplan.naftan.restore', $operplan->id) }}'>Восстановить</a></td>
                                                     @else
@@ -91,7 +91,7 @@
                                                 <td>{{ $gidrant->zavod }}</td>
                                                 <td><a href = '{{ $gidrant->file }}' target="_blank">{{ $gidrant->objekt }}</a></td>
                                                 <td>{{ $gidrant->opisanie }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($gidrant->deleted_at)->format('d.m.Y H:i') }} Создатель: {{$gidrant->user->name ?? 'удалён'}}</td>
+                                                <td>{{ \Carbon\Carbon::parse($gidrant->deleted_at)->format('d.m.Y H:i') }} Создатель: {{$gidrant->user->firstname ?? 'удалён'}}</td>
                                                 @if($gidrant->zavod == 'Нафтан')
                                                     <td><a href = '{{ route('gidrant.naftan.restore', $gidrant->id) }}'>Восстановить</a></td>
                                                 @else
@@ -137,7 +137,7 @@
                                                 <td>{{$loop->iteration }}</td>
                                                 <td>{{ $polygon->zavod }}</td>
                                                 <td>{{ $polygon->opisanie }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($polygon->deleted_at)->format('d.m.Y H:i') }} Создатель: {{$polygon->user->name ?? 'удалён'}}</td>
+                                                <td>{{ \Carbon\Carbon::parse($polygon->deleted_at)->format('d.m.Y H:i') }} Создатель: {{$polygon->user->firstname ?? 'удалён'}}</td>
                                                 @if($polygon->zavod == 'Нафтан')
                                                     <td><a href = '{{ route('polygon.naftan.restore', $polygon->id) }}'>Восстановить</a></td>
                                                 @else
