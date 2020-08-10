@@ -17,7 +17,7 @@ class UserEditController extends Controller
     public function index()
     {
         if (Auth::user()->admin == '1'){                     //это проверка на админа
-            $pole = ['id','name','email', 'admin', 'activ', 'avatar'];
+            $pole = ['id','name','firstname','email', 'admin', 'activ', 'avatar'];
             $colums = User::select($pole)
                 ->orderBy('name', 'asc')
                 ->get();

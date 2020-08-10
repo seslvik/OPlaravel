@@ -32,7 +32,7 @@
                                 <td>{{ $colum->zavod }}</td>
                                 <td><a href = '{{ $colum->file }}' target="_blank">{{ $colum->objekt }}</a></td>
                                 <td>{{ $colum->opisanie }}</td>
-                                <td>{{ \Carbon\Carbon::parse($colum->updated_at)->format('d.m.Y H:i') }} Создатель: {{$colum->user->name ?? 'удалён'}}</td>
+                                <td>{{ \Carbon\Carbon::parse($colum->updated_at)->format('d.m.Y H:i') }} Создатель: {{$colum->user->firstname ?? 'удалён'}}</td>
                                 <td><a href = '{{ route('operplan.'.$zavod.'.show', $colum->id) }}'>Показать на карте</a></td>
                                 <td><a href = '{{ route('operplan.'.$zavod.'.edit', $colum->id) }}'>Изменить</a></td>
                             </tr>

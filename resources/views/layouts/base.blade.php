@@ -129,9 +129,9 @@
                         <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="false" aria-expanded="false">
                             @if(Auth::user()->avatar == 1)
-                                <img src="{{ asset('img/avatar-1.jpg') }}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"> {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="{{ asset('img/avatar-1.jpg') }}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"> {{ Auth::user()->firstname }} <i class="mdi mdi-chevron-down"></i> </span>
                             @else
-                                <img src="{{ asset('img/avatar-2.jpg') }}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"> {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i> </span>
+                                <img src="{{ asset('img/avatar-2.jpg') }}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name"> {{ Auth::user()->firstname }} <i class="mdi mdi-chevron-down"></i> </span>
                             @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">

@@ -18,6 +18,7 @@
                                 <tr>
                                     <th>№</th>
                                     <th>Логин</th>
+                                    <th>Имя</th>
                                     <th>Email</th>
                                     <th>Вкл.</th>
                                     <th>Админ</th>
@@ -30,6 +31,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $colum->name }}</td>
+                                    <td>{{ $colum->firstname }}</td>
                                     <td>{{ $colum->email }}</td>
                                     <td>
                                         <div class='custom-control custom-radio'>
@@ -77,6 +79,7 @@
                             <tr>
                                 <th>№</th>
                                 <th>Логин</th>
+                                <th>Имя</th>
                                 <th>Email</th>
                                 <th>Вкл.</th>
                                 <th>Админ</th>

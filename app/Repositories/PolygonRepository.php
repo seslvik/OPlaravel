@@ -34,7 +34,7 @@ class PolygonRepository extends CoreRepository
         return $this->startConditions()->select($pole) //такой запрос уменьшает число обращений к базе
         ->where('zavod', $zavod)      //много запросов связано с тем, что я вывожу имя пользователя кто создал ОП в вьюшке
         ->orderBy('opisanie', 'asc')
-            ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
+            ->with(['user:id,firstname']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
             //->toBase() //не создает модели
             ->get(); //для этого необходимо в соответствующей модели создать метод user
     }
@@ -50,7 +50,7 @@ class PolygonRepository extends CoreRepository
        // $pole = ['id','user_id','zavod', 'opisanie','updated_at', 'deleted_at'];
         return $this->startConditions()->onlyTrashed() //такой запрос показывает только удаленные записи
         ->orderBy('deleted_at', 'desc')
-            ->with(['user:id,name']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
+            ->with(['user:id,firstname']) //этот оператор ищет имена тех пользователей кто создал ОП и ищет в таблице user и выводит их name
             //->toBase() //не создает модели
             ->get(); //для этого необходимо в соответствующей модели создать метод user
     }
