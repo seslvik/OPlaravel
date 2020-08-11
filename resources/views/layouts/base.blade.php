@@ -39,7 +39,7 @@
                             <a href="{{ route('home') }}"><span><i class="ti-home"></i></span><span> Домой </span> </a>
                         </li>
                         <li class="has-submenu">
-                            <a href="{{ route('naftanhome') }}"><span><i class="ti-spray"></i></span><span> Нафтан </span> </a>
+                            <a href="{{ route('naftanhome') }}"><span><i class="ti-location-pin"></i></span><span> Нафтан </span> </a>
                             <ul class="submenu">
                                 <li class="has-submenu">
                                     <a href="#">Оперативные планы</a>
@@ -68,7 +68,7 @@
                             </ul>
                         </li>
                         <li class="has-submenu">
-                            <a href="{{ route('polymirhome') }}"><span><i class="ti-spray"></i></span><span> Полимир </span> </a>
+                            <a href="{{ route('polymirhome') }}"><span><i class="ti-location-pin"></i></span><span> Полимир </span> </a>
                             <ul class="submenu">
                                 <li class="has-submenu">
                                     <a href="#">Оперативные планы</a>

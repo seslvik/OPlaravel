@@ -13,12 +13,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="datatable" class="table table-bordered table-hover">
+                        <table id="datatable" class="table table-bordered ">
                             <thead>
                                 <tr>
                                     <th>№</th>
                                     <th>Логин</th>
-                                    <th>Имя</th>
+                                    <th>Имя(<span><i class="ti-pencil-alt2"></i></span>)</th>
                                     <th>Email</th>
                                     <th>Вкл.</th>
                                     <th>Админ</th>
@@ -31,7 +31,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $colum->name }}</td>
-                                    <td>{{ $colum->firstname }}</td>
+                                    <td id="{{$colum->id}}" onClick='editfirstname({{$colum->id}})'>{{ $colum->firstname }}</td>
                                     <td>{{ $colum->email }}</td>
                                     <td>
                                         <div class='custom-control custom-radio'>

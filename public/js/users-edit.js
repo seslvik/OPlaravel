@@ -82,3 +82,48 @@ function getavatar (id, value) {
         }
     });
 }
+
+function editfirstname (id) {
+    let el=$('#'+id);
+    let elcolor = el.css('background');
+    if(el.children("input").length > 0)
+        return false;
+    el.css({background: '#7fc48f'});
+    let tdObj = el;
+    const preText = tdObj.html();
+    const inputObj = $("<input type='text' />");
+    tdObj.html("");
+    inputObj.width(tdObj.width())
+        .height(tdObj.height())
+        .css({border:"0px",fontSize:"15px"})
+        .val(preText)
+        .appendTo(tdObj)
+        .trigger("focus")
+        .trigger("select");
+    inputObj.keyup(function(event){
+        if(13 == event.which) { // press ENTER-key
+            let text = $(this).val();
+            tdObj.html(text);
+            $.ajax({
+                data: {"id_user": id, "value": text},
+                type: "POST",
+                url: "/editfirstname",
+                headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+                dataType:"html",
+                success: function (data) {
+                    if (data === "no"){
+                        alert(data);
+                    }
+                }
+            });
+            el.css({background: '#fafafa'});
+        }
+        else if(27 == event.which) {  // press ESC-key
+            tdObj.html(preText);
+            el.css({background: elcolor});
+        }
+    });
+    inputObj.click(function(){
+        return false;
+    });
+}

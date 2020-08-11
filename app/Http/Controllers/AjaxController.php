@@ -162,4 +162,22 @@ class AjaxController extends Controller
         return "no";
     }
 
+    /**
+     * Обработка Ajax запроса для редактирования поля editfirstname пользователя
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return false|string
+     */
+    public function userEditFirstnameAjax(Request $request)
+    {
+        $item = $request->all('id_user', 'value');
+        if (isset($item)){
+            $user = User::find($item['id_user']);
+            $data['firstname'] = $item['value'];
+            $user->update($data);
+            return "yes";
+        }
+        return "no";
+    }
+
 }

@@ -82,7 +82,7 @@
                         {label: "Гидранты", value: '{{ $gidrant_count }}'},
                         {label: "Объекты", value: '{{ $object_count }}'}
                     ];
-                    this.createDonutChart('morris-donut', $donutData, ['#458bc4','#f2cc5b', '#3db9dc']);
+                    this.createDonutChart('morris-donut', $donutData, ['#458bc4','#604f24', '#3db9dc']);
                 },
                 //init
                 $.MorrisCharts = new MorrisCharts, $.MorrisCharts.Constructor = MorrisCharts

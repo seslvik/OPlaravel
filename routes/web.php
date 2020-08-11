@@ -75,6 +75,8 @@ Route::post('/user-up-down', 'AjaxController@userUpDownAjax')->name('user-up-dow
 Route::post('/user-admin-up-down', 'AjaxController@userAdminUpDownAjax')->name('user-admin-up-down');
 
 Route::post('/user-avatar', 'AjaxController@userAvatarAjax')->name('user-avatar');
+
+Route::post('/editfirstname', 'AjaxController@userEditFirstnameAjax')->name('user-editfirstname');
 //Экспорт оперпланов  и гидрантов
 Route::get('operplans/export/', 'Naftan\NaftanOperplanController@export')->name('operplan.export');
 Route::get('gidrants/export/', 'Naftan\NaftanGidrantController@export')->name('gidrant.export');
