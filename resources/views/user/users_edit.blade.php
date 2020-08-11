@@ -18,7 +18,7 @@
                                 <tr>
                                     <th>№</th>
                                     <th>Логин</th>
-                                    <th>Имя(<span><i class="ti-pencil-alt2"></i></span>)</th>
+                                    <th title="Enter-сохранить; ESC-отмена">Имя(<span><i class="ti-pencil-alt2"></i></span>)</th>
                                     <th>Email</th>
                                     <th>Вкл.</th>
                                     <th>Админ</th>
