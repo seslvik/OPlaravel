@@ -27,8 +27,11 @@ class CreateOperplansTable extends Migration
 
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('user_id')->references('id')->on('users');
+            //индекс
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
+                //->onDelete('cascade'); если это написать то при удалении пользователя удалятся все его записи в других таблицах
         });
     }
 

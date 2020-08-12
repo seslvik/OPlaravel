@@ -4,9 +4,12 @@ php artisan make:model Gidrant -f создать фабрику
 php artisan make:model Gidrant -mf создать модель миграцию и фабрику
 php artisan make:seeder GidrantTableSeeder создать сид
 
+запускаем миграции
+php artisan migrate
 запускаем миграцию и сид (пересоздает все таблицы и заполняет данными)
 php artisan migrate:refresh --seed
-
+удалить все таблицы и создать заново
+php artisan migrate:fresh
 запускаем сид
 php artisan db:seed --class=UsersTableSeeder
 php artisan db:seed
