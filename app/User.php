@@ -16,7 +16,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'firstname', 'email', 'password', 'admin', 'activ', 'avatar'
+        'name',
+        'firstname',
+        'email',
+        'password',
+        'admin',
+        'activ',
+        'avatar',
     ];
 
     /**
@@ -30,7 +36,7 @@ class User extends Authenticatable
 
     /**
      * The attributes that should be cast to native types.
-     *
+     * это конвертация поля в массив , дататайм и т.д. или поле стринг надо конвертировать в инт
      * @var array
      */
     protected $casts = [

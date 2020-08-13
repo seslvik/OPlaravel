@@ -42,7 +42,13 @@ class PolygonUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'opisanie.required'  => 'Поле не должно быть пустым',
+            'opisanie.required' => 'Поле :attribute не должно быть пустым!',
+            'pos_x_1.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_y_1.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_x_2.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_y_2.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_x_3.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_y_3.required'  => 'Поле :attribute не должно быть пустым!',
         ];
     }
 }

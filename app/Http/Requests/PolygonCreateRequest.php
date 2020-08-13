@@ -24,7 +24,7 @@ class PolygonCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'opisanie'  => 'string|required|max:1000',
+            'opisanie'  => 'required|string|max:1000',
             'pos_x_1'   => 'required|min:3|max:5',
             'pos_y_1'   => 'required|min:3|max:5',
             'pos_x_2'   => 'required|min:3|max:5',
@@ -42,7 +42,13 @@ class PolygonCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            'opisanie.required'  => 'Поле не должно быть пустым',
+            'opisanie.required' => 'Поле :attribute не должно быть пустым!',
+            'pos_x_1.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_y_1.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_x_2.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_y_2.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_x_3.required'  => 'Поле :attribute не должно быть пустым!',
+            'pos_y_3.required'  => 'Поле :attribute не должно быть пустым!',
         ];
     }
 }
