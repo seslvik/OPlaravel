@@ -1,25 +1,4 @@
 @extends('layouts.base')
-{{--@section('content2')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    Здесь будет домашняя страничка!!!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection--}}
 @section('content')
     @php /** @var int $operplan_count */ @endphp
     <div class="p-t-50">
@@ -27,7 +6,13 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="card-box">
-                        <h6 class="m-t-0">Нафтан</h6>
+                        {{--<h6 class="m-t-0">Нафтан</h6>--}}
+                        <table class="m-t-0" style="width: 100%;border-spacing: 0;">
+                            <tr>
+                                <td style="width: 50%;"><h6>Нафтан</h6></td>
+                                <td style="text-align: right;"><h6>ОП- {{ $operplan_count }};ПГ-{{ $gidrant_count }}</h6></td>
+                            </tr>
+                        </table>
                         <div>
                             <a href="{{ route('naftanhome') }}">
                                 <img class="card-img-top" src="{{ asset('img/sputnik/Нафтан100_mini.jpg') }}" alt="ОАО Нафтан">

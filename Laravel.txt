@@ -93,7 +93,7 @@ php composer.phar require php-parallel-lint/php-console-highlighter
 --------------------------------------------------------------------------------------------------
 установка Laravel
 1. OpenServer (в доменах прописать \operplan.lor\public)
-2. Установить composer
+2. Установить composer  и node.js(npm)
 3. Установить Laravel через php composer.phar и авторизацию с подключением Bootstrap
 	настроить .env
 4. Разрешения 777 на папки storage и bootstrap/cache
